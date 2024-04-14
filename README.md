@@ -1,6 +1,7 @@
 # Medi_vault
 520 project repository
 
-to initalize frontend:
+To initalize frontend:
+- navigate to Frontend folder
 - npm i
 - npm run dev
