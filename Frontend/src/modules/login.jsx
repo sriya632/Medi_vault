@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Web3 from 'web3'
 import '../css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'slick-carousel/slick/slick.css'; 
@@ -8,14 +9,134 @@ import { FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 
 const LoginForm = () => {
+
+    const [formData, setFormData] = useState({
+        email: '',
+        password: ''
+    });
+
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
 
-    const submitLogin = () => {
-        console.log("Submitted")
+    const handleChange = (event) => {
+        const { name, value } = event.target;
+        setFormData(prevState => ({
+            ...prevState,
+            [name]: value
+        }));
+    };
+
+    const submitLogin = (event) => {
+        event.preventDefault(); // Prevent the default form submission
+        const projectId = '6bc42b50d520477f99374ca081d7a0c5';
+        const infuraUrl = `https://polygon-amoy.infura.io/v3/6bc42b50d520477f99374ca081d7a0c5`;
+
+        const web3 = new Web3(new Web3.providers.HttpProvider(infuraUrl, {
+            headers: [{ name: "Authorization", value: "Basic "}]
+          }));
+
+        const address = "0xb02992b422bB7377B0b3ee8dd04Fc3ea6e900823";
+        const abi =  [
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_email",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_password",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_confirmPassword",
+                        "type": "string"
+                    }
+                ],
+                "name": "createAccount",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "_email",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "_password",
+                        "type": "string"
+                    }
+                ],
+                "name": "loginAccount",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "address",
+                        "name": "",
+                        "type": "address"
+                    }
+                ],
+                "name": "users",
+                "outputs": [
+                    {
+                        "internalType": "string",
+                        "name": "email",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "bytes32",
+                        "name": "hashedPassword",
+                        "type": "bytes32"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+        const contract = new web3.eth.Contract(abi,address);
+
+        const account = web3.eth.accounts.privateKeyToAccount('0x51a18a3afa87e9833a04d67dc201244f5e92fd17fd98d4221532281d5b21438c');
+        web3.eth.accounts.wallet.add(account);
+        web3.eth.defaultAccount = account.address;
+        console.log(account.address);
+        // Example of a contract function call
+        contract.methods.loginAccount(formData.email, formData.password)
+        .call({from: account.address})
+        .then(result => {
+                if(result){
+                    console.log('Login successful: ', result);
+                    alert('Login successful!');
+                }
+                else{
+                    alert('Login failed! Check username or password');
+                    console.log("no transaction errors");
+                }
+        }).catch(error => {
+                console.error('Login failed: ', error);
+                if (error.receipt) {
+                  console.log('Transaction receipt: ', error.receipt); // Provides more details about the transaction failure
+                }
+        });
+        // Here you can add your logic to handle the registration,
     };
 
     return (
@@ -32,6 +153,8 @@ const LoginForm = () => {
                             name="email"
                             placeholder="Enter your email"
                             required=""
+                            onChange={handleChange}
+                            value={formData.email}
                         />
                     </div>
                     <div className="form-group password-group">
@@ -42,6 +165,8 @@ const LoginForm = () => {
                             name="password"
                             placeholder="Enter your password"
                             required=""
+                            onChange={handleChange}
+                            value={formData.password}
                         />
                         <div onClick={togglePasswordVisibility} style={{ cursor: 'pointer', display: 'inline-block', marginTop: "10px"}}>
                             {showPassword ? 
