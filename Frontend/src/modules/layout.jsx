@@ -21,7 +21,7 @@ const Layout = () => {
                     <div className="row align-items-center">
                         <div className="col-lg-6">
                             <ul className="top-bar-info list-inline-item pl-0 mb-0">
-                                <li className="list-inline-item"><a href="mailto:support@gmail.com"><MdContactSupport className="mr-2" />support@medapp.com</a></li>
+                                <li className="list-inline-item"><a href="mailto:support@gmail.com"><MdContactSupport className="mr-2" />support@medivault.com</a></li>
                                 <li className="list-inline-item"><FaLocationDot className="icofont-location-pin mr-2" />140 Governors Dr. Amherst, MA, USA{" "}</li>
                             </ul>
                         </div>
@@ -39,7 +39,7 @@ const Layout = () => {
             <nav className="navbar navbar-expand-lg navigation" id="navbar">
                 <div className="container">
                     <a className="navbar-brand" href="index.html">
-                        <img src="logo.png" alt="" className="img-fluid" />
+                        <img src="logo.jpg" alt="" className="img-fluid" width="150" height="150"/>
                     </a>
                     <button className="navbar-toggler collapsed"type="button"data-toggle="collapse" data-target="#navbarmain"
                         aria-controls="navbarmain"aria-expanded="false"aria-label="Toggle navigation">

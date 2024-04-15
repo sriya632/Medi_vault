@@ -8,7 +8,9 @@ import { FiEyeOff } from "react-icons/fi";
 
 const RegisterForm = () => {
     const [showPassword, setShowPassword] = useState(false);
-
+    const [FirstName, setFirstName] = useState('');
+    const [LastName, setLastName] = useState('');
+    const [PhoneNumber, setPhoneNumber] = useState('');
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -23,6 +25,42 @@ const RegisterForm = () => {
             <div className="auth-form-wrap">
                 <h2>Create Your Account</h2>
                 <div>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="FirstName"
+                            name="FirstName"
+                            placeholder="Enter your First Name"
+                            value={FirstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required=""          
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            className="form-control"
+                            id="LastName"
+                            name="LastName"
+                            placeholder="Enter your Last Name"
+                            value={LastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required=""          
+                        />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="tel"
+                            className="form-control"
+                            id="PhoneNumber"
+                            name="PhoneNumber"
+                            placeholder="Enter your Phone Number"
+                            value={PhoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            required=""          
+                        />
+                    </div>
                     <div className="form-group">
                         <input
                             type="email"
