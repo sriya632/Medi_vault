@@ -3,6 +3,7 @@ import './css/styles.css';
 import Layout from './modules/layout';
 import LoginForm from './modules/login.jsx';
 import RegisterForm from './modules/register';
+import AboutPage from './modules/about.jsx';
 
 export default function App(){
   return (
@@ -12,6 +13,7 @@ export default function App(){
           {/* <Route index element={ <Home /> } /> */}
           <Route path="login" element={ <LoginForm /> } />
           <Route path="register" element={ <RegisterForm /> } />
+          <Route path="about" element={ <AboutPage /> } />
         </Route>
       </Routes>
     </BrowserRouter>
