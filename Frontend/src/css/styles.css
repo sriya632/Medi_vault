@@ -552,15 +552,15 @@ a:focus {
   background: #eff0f3;
 }
 
-.appoinment-content {
+.appointment-content {
   position: relative;
 }
 
-.appoinment-content img {
+.appointment-content img {
   width: 85%;
 }
 
-.appoinment-content .emergency {
+.appointment-content .emergency {
   position: absolute;
   content: "";
   right: 10px;
@@ -569,26 +569,26 @@ a:focus {
   padding: 48px;
 }
 
-.appoinment-content .emergency h2 {
+.appointment-content .emergency h2 {
   color: #fff;
 }
 
-.appoinment-content .emergency i {
+.appointment-content .emergency i {
   margin-right: 10px;
   color: rgba(255, 255, 255, 0.7);
 }
 
-.appoinment-form {
+.appointment-form {
   margin-top: 40px;
 }
 
-.appoinment-form .form-control {
+.appointment-form .form-control {
   background: #f4f9fc;
   height: 55px;
   border-color: rgba(0, 0, 0, 0.05);
 }
 
-.appoinment-form textarea.form-control {
+.appointment-form textarea.form-control {
   height: auto;
 }
 

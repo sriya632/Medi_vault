@@ -4,6 +4,8 @@ import Layout from './modules/layout';
 import LoginForm from './modules/login.jsx';
 import RegisterForm from './modules/register';
 import AboutPage from './modules/about.jsx';
+import AppointmentPage from './modules/appointment.jsx';
+import DoctorPage from './modules/doctor.jsx';
 
 export default function App(){
   return (
@@ -14,6 +16,8 @@ export default function App(){
           <Route path="login" element={ <LoginForm /> } />
           <Route path="register" element={ <RegisterForm /> } />
           <Route path="about" element={ <AboutPage /> } />
+          <Route path="appointment" element={<AppointmentPage />} />
+          <Route path="doctor" element={<DoctorPage/>} />   
         </Route>
       </Routes>
     </BrowserRouter>

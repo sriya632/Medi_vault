@@ -52,8 +52,8 @@ const Layout = () => {
                             <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li>
                             <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
                             <li className="nav-item"><a className="nav-link" href="service.html">Services</a></li>
-                            <li className="nav-item"><a className="nav-link" href="service.html">Doctors</a></li>
-                            <li className="nav-item"><a className="nav-link" href="service.html">Appointment</a></li>
+                            <li className="nav-item"><Link className="nav-link" to="/doctor">Doctors</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/appointment">Appointment</Link></li>
                             <li className="nav-item"><a className="nav-link" href="service.html">Profile</a></li>
                             <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
                         </ul>
