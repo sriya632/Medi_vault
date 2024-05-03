@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AppointmentTab = () => {
     // Sample data for appointments
@@ -27,7 +28,7 @@ const AppointmentTab = () => {
                             <td>{appointment.date}</td>
                             <td>{appointment.time}</td>
                             <td>
-                                <button className="btn btn-primary btn-sm" disabled>View Details</button>
+                                <Link to={`/patient/${appointment.id}`} className="btn btn-primary btn-sm">View Details</Link>
                             </td>
                         </tr>
                     ))}
