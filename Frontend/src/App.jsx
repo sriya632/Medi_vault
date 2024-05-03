@@ -6,6 +6,7 @@ import RegisterForm from './modules/register';
 import AboutPage from './modules/about.jsx';
 import AppointmentPage from './modules/appointment.jsx';
 import DoctorPage from './modules/doctor.jsx';
+import DoctorViewPage from './modules/doctor-view';
 
 export default function App(){
   return (
@@ -17,7 +18,8 @@ export default function App(){
           <Route path="register" element={ <RegisterForm /> } />
           <Route path="about" element={ <AboutPage /> } />
           <Route path="appointment" element={<AppointmentPage />} />
-          <Route path="doctor" element={<DoctorPage/>} />   
+          <Route path="doctor" element={<DoctorPage/>} />
+          <Route path="doctorView" element={<DoctorViewPage/>} />
         </Route>
       </Routes>
     </BrowserRouter>
