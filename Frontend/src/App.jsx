@@ -6,7 +6,7 @@ import RegisterForm from './modules/register';
 import AboutPage from './modules/about.jsx';
 import AppointmentPage from './modules/appointment.jsx';
 import DoctorPage from './modules/doctor.jsx';
-import DoctorViewPage from './modules/doctor-view';
+import DoctorViewPage from './modules/doctor-view/doctor-view';
 
 export default function App(){
   return (

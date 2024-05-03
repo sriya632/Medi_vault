@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import AppointmentTab from './appointment-tab';
 
 const DoctorViewPage = () => {
     // State to manage active tab
@@ -46,7 +47,7 @@ const DoctorViewPage = () => {
                             {activeTab === 'appointment' && (
                                 <div className="tab-pane fade show active">
                                     {/* Appointment Details content goes here */}
-                                    <p>Appointment Details content goes here.</p>
+                                    <AppointmentTab />
                                 </div>
                             )}
                             {activeTab === 'reports' && (
