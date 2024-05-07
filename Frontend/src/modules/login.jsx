@@ -7,6 +7,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
 
@@ -14,6 +15,8 @@ const LoginForm = () => {
         email: '',
         password: ''
     });
+
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
 
@@ -38,7 +41,7 @@ const LoginForm = () => {
             headers: [{ name: "Authorization", value: "Basic "}]
           }));
 
-        const address = "0xb02992b422bB7377B0b3ee8dd04Fc3ea6e900823";
+        const address = "0x4C9c5b14D15C030c723c7352ddd818246d2223a1";
         const abi =  [
             {
                 "inputs": [
@@ -125,6 +128,7 @@ const LoginForm = () => {
                 if(result){
                     console.log('Login successful: ', result);
                     alert('Login successful!');
+                    navigate('/appointment');
                 }
                 else{
                     alert('Login failed! Check username or password');

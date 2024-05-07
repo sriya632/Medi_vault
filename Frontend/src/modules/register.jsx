@@ -6,6 +6,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
 
 const RegisterForm = () => {
 
@@ -17,6 +18,8 @@ const RegisterForm = () => {
         password: '',
         confirmPassword: ''
     });
+
+    const navigate = useNavigate();
 
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
@@ -38,7 +41,7 @@ const RegisterForm = () => {
         headers: [{ name: "Authorization", value: "Basic "}]
       }));
 
-    const address = "0xb02992b422bB7377B0b3ee8dd04Fc3ea6e900823";
+    const address = "0x4C9c5b14D15C030c723c7352ddd818246d2223a1";
     const abi =  [
         {
             "inputs": [
@@ -131,6 +134,7 @@ const RegisterForm = () => {
             .send({from: account.address, gas: 3000000}).then(result => {
                 console.log('Transaction successful: ', result);
                 alert('Registration successful!');
+                navigate('/appointment');
               })
               .catch(error => {
                 console.error('Transaction failed: ', error);
