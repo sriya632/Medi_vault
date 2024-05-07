@@ -92,13 +92,20 @@ const AppointmentPage = () => {
 
                     <div className="col-lg-6">
                       <div className="form-group">
-                        <input name="date" id="date" type="text" className="form-control" placeholder="dd/mm/yyyy" />
+                        <input name="date"
+                               id="date"
+                               type="date"
+                               className="form-control"
+                               placeholder="dd/mm/yyyy"
+                               onChange={handleChange}
+                               value={formData.date}
+                        />
                       </div>
                     </div>
 
                     <div className="col-lg-6">
                       <div className="form-group">
-                        <input name="time" id="time" type="text" className="form-control" placeholder="Time" />
+                        <input name="time" id="time" type="time" className="form-control" placeholder="Time" />
                       </div>
                     </div>
                     <div className="col-lg-6">
