@@ -4,9 +4,6 @@ import Layout from './modules/layout';
 import LoginForm from './modules/login.jsx';
 import RegisterForm from './modules/register';
 import AboutPage from './modules/about.jsx';
-<<<<<<< HEAD
-import AppointmentPage from "./modules/appointment.jsx";
-=======
 import AppointmentPage from './modules/appointment.jsx';
 import DoctorPage from './modules/doctor.jsx';
 import DoctorViewPage from './modules/doctor-view/doctor-view';

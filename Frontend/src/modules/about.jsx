@@ -28,7 +28,7 @@ const AboutPage = () => {
               <h2 className="title-color">Personal care for your healthy living</h2>
             </div>
             <div className="col-lg-8">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, quod laborum alias. Vitae dolorum, officia sit! Saepe ullam facere at, consequatur incidunt, quae esse, quis ut reprehenderit dignissimos, libero delectus.</p>
+              <p>Personal care is vital for a healthy lifestyle, encompassing hygiene, balanced nutrition, regular exercise, and adequate sleep. These habits boost overall well-being, help prevent illnesses, and improve mental health, ensuring a more fulfilling life.</p>
               <img src="/about/sign.png" alt="" className="img-fluid" />
             </div>
           </div>

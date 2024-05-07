@@ -128,11 +128,7 @@ const LoginForm = () => {
                 if(result){
                     console.log('Login successful: ', result);
                     alert('Login successful!');
-<<<<<<< Updated upstream
                     navigate('/appointment');
-=======
-
->>>>>>> Stashed changes
                 }
                 else{
                     alert('Login failed! Check username or password');
@@ -183,7 +179,8 @@ const LoginForm = () => {
                             {showPassword ? <a ><FiEye /></a> : <a ><FiEyeOff /></a>} 
                         </div>
                         <div>
-                            <Link to={"/register"} className="text-sm">Register</Link>
+                           <Link to={"/register"} className="text-sm">Register</Link><br />
+                            <Link to={"/doctorlogin"} className="text-sm">Are you an admin?</Link>
                         </div>
                     </div>
                     <button className="btn btn-primary btn-block" onClick={submitLogin}> Login </button>
