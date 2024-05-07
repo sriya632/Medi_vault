@@ -128,7 +128,11 @@ const LoginForm = () => {
                 if(result){
                     console.log('Login successful: ', result);
                     alert('Login successful!');
+<<<<<<< Updated upstream
                     navigate('/appointment');
+=======
+
+>>>>>>> Stashed changes
                 }
                 else{
                     alert('Login failed! Check username or password');

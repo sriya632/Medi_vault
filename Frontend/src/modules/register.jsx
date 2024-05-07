@@ -19,8 +19,11 @@ const RegisterForm = () => {
         confirmPassword: ''
     });
 
+<<<<<<< Updated upstream
     const navigate = useNavigate();
 
+=======
+>>>>>>> Stashed changes
     const [showPassword, setShowPassword] = useState(false);
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
@@ -41,7 +44,11 @@ const RegisterForm = () => {
         headers: [{ name: "Authorization", value: "Basic "}]
       }));
 
+<<<<<<< Updated upstream
     const address = "0x4C9c5b14D15C030c723c7352ddd818246d2223a1";
+=======
+    const address = "0xb02992b422bB7377B0b3ee8dd04Fc3ea6e900823";
+>>>>>>> Stashed changes
     const abi =  [
         {
             "inputs": [
@@ -134,7 +141,10 @@ const RegisterForm = () => {
             .send({from: account.address, gas: 3000000}).then(result => {
                 console.log('Transaction successful: ', result);
                 alert('Registration successful!');
+<<<<<<< Updated upstream
                 navigate('/appointment');
+=======
+>>>>>>> Stashed changes
               })
               .catch(error => {
                 console.error('Transaction failed: ', error);
