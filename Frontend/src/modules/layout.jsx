@@ -51,7 +51,7 @@ const Layout = () => {
                     <ul className="navbar-nav ml-auto">
                             <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li>
                             <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
-                            <li className="nav-item"><a className="nav-link" href="service.html">Services</a></li>
+                            <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/doctor">Doctors</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/appointment">Appointment</Link></li>
                             <li className="nav-item"><a className="nav-link" href="service.html">Profile</a></li>
@@ -155,14 +155,7 @@ const Layout = () => {
                                 </a>
                             </div>
                         </div>
-                        <div className="col-lg-6">
-                            <div className="subscribe-form text-lg-right mt-5 mt-lg-0">
-                                <form action="#" className="subscribe">
-                                    <input type="text" className="form-control" placeholder="Your Email address" />
-                                    <a href="#" className="subscribe-btn-that-doesnt-work"> Subscribe </a>
-                                </form>
-                            </div>
-                        </div>
+                        
                     </div>
                     <div className="row">
                         <div className="col-lg-4">

@@ -28,7 +28,7 @@ const AboutPage = () => {
               <h2 className="title-color">Personal care for your healthy living</h2>
             </div>
             <div className="col-lg-8">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt, quod laborum alias. Vitae dolorum, officia sit! Saepe ullam facere at, consequatur incidunt, quae esse, quis ut reprehenderit dignissimos, libero delectus.</p>
+              <p>Our Dedicated Healthcare Professionals Provide Comprehensive, Individualized Solutions to Promote Your Overall Wellness and Empower You on Your Journey to Optimal Health</p>
               <img src="/about/sign.png" alt="" className="img-fluid" />
             </div>
           </div>
@@ -43,28 +43,28 @@ const AboutPage = () => {
               <div className="about-block-item mb-5 mb-lg-0">
                 <img src="/about/about-1.jpg" alt="" className="img-fluid w-100" />
                 <h4 className="mt-3">Healthcare for Kids</h4>
-                <p>Voluptate aperiam esse possimus maxime repellendus, nihil quod accusantium .</p>
+                <p>Nurturing Little Smiles, Ensuring a Healthy Future for Our Tiny Treasures</p>
               </div>
             </div>
             <div className="col-lg-3 col-md-6">
 				<div className="about-block-item mb-5 mb-lg-0">
 					<img src="/about/about-2.jpg" alt="" class="img-fluid w-100"/>
 					<h4 className="mt-3">Medical Counseling</h4>
-					<p>Voluptate aperiam esse possimus maxime repellendus, nihil quod accusantium .</p>
+					<p>Personalized Guidance to Empower Informed Decisions for Optimal Well-being</p>
 				</div>
 			</div>
             <div className="col-lg-3 col-md-6">
 				<div className="about-block-item mb-5 mb-lg-0">
 					<img src="/about/about-3.jpg" alt="" class="img-fluid w-100"/>
 					<h4 className="mt-3">Modern Equipments</h4>
-					<p>Voluptate aperiam esse possimus maxime repellendus, nihil quod accusantium .</p>
+					<p>State-of-the-Art Facilities, Equipped to Deliver Cutting-Edge Care with Accuracy and Efficiency.</p>
 				</div>
 			</div>
             <div className="col-lg-3 col-md-6">
 				<div className="about-block-item">
 					<img src="/about/about-4.jpg" alt="" class="img-fluid w-100"/>
 					<h4 className="mt-3">Qualified Doctors</h4>
-					<p>Voluptate aperiam esse possimus maxime repellendus, nihil quod accusantium .</p>
+					<p>Entrusting Your Health to the Skilled Hands of Highly Trained Medical Professionals.A Team of Dedicated Experts, Committed to Delivering Excellence in Patient Care.</p>
 				</div>
 			</div>
           </div>
@@ -125,11 +125,11 @@ const AboutPage = () => {
 		    <div className="row justify-content-center">
 			    <div className="col-lg-6">
 				    <div className="section-title text-center">
-					    <h2 className="mb-4">Meet Our Specialist</h2>
+					    <h2 className="mb-4">Meet Our Specialists</h2>
 					    <div className="divider mx-auto my-4">
 
                         </div>
-					<p>Today’s users expect effortless experiences. Don’t let essential people and processes stay stuck in the past. Speed it up, skip the hassles</p>
+					<p>Discover a World of Expertise: Personalized Care from Our Distinguished Team of Specialists.</p>
 				</div>
 			</div>
 		</div>
