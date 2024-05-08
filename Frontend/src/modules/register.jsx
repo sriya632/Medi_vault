@@ -7,9 +7,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext.jsx';
+
 
 const RegisterForm = () => {
-
+    const { register } = useAuth();
     const [formData, setFormData] = useState({
         FirstName: '',
         LastName: '',
@@ -122,34 +124,41 @@ const RegisterForm = () => {
     web3.eth.defaultAccount = account.address;
 
     const submitRegister = (event) => {
-        event.preventDefault(); // Prevent the default form submission
-        console.log(account.address);
-        if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
-            return;
-        }
-        try {
-            // Example of a contract function call
-            contract.methods.createAccount(formData.email, formData.password,formData.confirmPassword)
-            .send({from: account.address, gas: 3000000}).then(result => {
+    event.preventDefault(); // Prevent the default form submission
+    console.log(account.address);
+    if (formData.password !== formData.confirmPassword) {
+        alert("Passwords do not match!");
+        return;
+    }
+    try {
+        // Example of a contract function call
+        contract.methods.createAccount(formData.email, formData.password, formData.confirmPassword)
+            .send({ from: account.address, gas: 3000000 })
+            .then(result => {
                 console.log('Transaction successful: ', result);
                 alert('Registration successful!');
-                navigate('/appointment');
-              })
-              .catch(error => {
+                const userData = {
+                    firstName: formData.FirstName,
+                    lastName: formData.LastName,
+                    email: formData.email
+                };
+                localStorage.setItem('userData', JSON.stringify(userData));
+                navigate('/profile');
+            })
+            .catch(error => {
                 console.error('Transaction failed: ', error);
                 alert('Registration failed! Already existing user or wrong details entered');
                 if (error.receipt) {
-                  console.log('Transaction receipt: ', error.receipt); // Provides more details about the transaction failure
+                    console.log('Transaction receipt: ', error.receipt); // Provides more details about the transaction failure
                 }
-              });
-              
-            console.log("Registration Submitted", formData);
-        } catch (error) {
-            console.error(error);
-            alert('Registration failed. See console for details.');
-        }
-    };
+            });
+
+        console.log("Registration Submitted", formData);
+    } catch (error) {
+        console.error(error);
+        alert('Registration failed. See console for details.');
+    }
+};
     return (
         <>
         <section>
@@ -240,6 +249,7 @@ const RegisterForm = () => {
         </section>
         </>
     );
+    register(userData);
 }
 
 export default RegisterForm;
