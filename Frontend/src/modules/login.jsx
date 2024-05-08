@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Web3 from 'web3'
 import '../css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -15,9 +15,9 @@ const LoginForm = () => {
         email: '',
         password: ''
     });
-
     const navigate = useNavigate();
-
+    const [web3, setWeb3] = useState(null);
+    const [account, setAccount] = useState(null);
     const [showPassword, setShowPassword] = useState(false);
 
     const togglePasswordVisibility = () => {
@@ -32,114 +32,143 @@ const LoginForm = () => {
         }));
     };
 
+    useEffect(() => {
+        if (window.ethereum) {
+            const web3Instance = new Web3(window.ethereum);
+            setWeb3(web3Instance);
+            connectWallet();
+        } else {
+            alert('Please install MetaMask to use this feature!');
+        }
+    }, []);
+
+    const connectWallet = async () => {
+        if (window.ethereum) {
+            try {
+                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                setAccount(accounts[0]); // Assuming you only need the first account
+                console.log('Connected with account:', accounts[0]);
+            } catch (error) {
+                console.error('Error connecting to MetaMask', error);
+                alert('Failed to connect MetaMask. If you refused the connection, please allow it to interact with this dApp.');
+            }
+        } else {
+            alert('Please install MetaMask to use this feature!');
+        }
+    };
+
     const submitLogin = (event) => {
         event.preventDefault(); // Prevent the default form submission
-        const projectId = '6bc42b50d520477f99374ca081d7a0c5';
-        const infuraUrl = `https://polygon-amoy.infura.io/v3/6bc42b50d520477f99374ca081d7a0c5`;
-
-        const web3 = new Web3(new Web3.providers.HttpProvider(infuraUrl, {
-            headers: [{ name: "Authorization", value: "Basic "}]
-          }));
-
-        const address = "0x4C9c5b14D15C030c723c7352ddd818246d2223a1";
-        const abi =  [
-            {
-                "inputs": [
-                    {
-                        "internalType": "string",
-                        "name": "_email",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "_password",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "_confirmPassword",
-                        "type": "string"
-                    }
-                ],
-                "name": "createAccount",
-                "outputs": [],
-                "stateMutability": "nonpayable",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "string",
-                        "name": "_email",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "string",
-                        "name": "_password",
-                        "type": "string"
-                    }
-                ],
-                "name": "loginAccount",
-                "outputs": [
-                    {
-                        "internalType": "bool",
-                        "name": "",
-                        "type": "bool"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            },
-            {
-                "inputs": [
-                    {
-                        "internalType": "address",
-                        "name": "",
-                        "type": "address"
-                    }
-                ],
-                "name": "users",
-                "outputs": [
-                    {
-                        "internalType": "string",
-                        "name": "email",
-                        "type": "string"
-                    },
-                    {
-                        "internalType": "bytes32",
-                        "name": "hashedPassword",
-                        "type": "bytes32"
-                    }
-                ],
-                "stateMutability": "view",
-                "type": "function"
-            }
-        ];
-        const contract = new web3.eth.Contract(abi,address);
-
-        const account = web3.eth.accounts.privateKeyToAccount('0x51a18a3afa87e9833a04d67dc201244f5e92fd17fd98d4221532281d5b21438c');
-        web3.eth.accounts.wallet.add(account);
-        web3.eth.defaultAccount = account.address;
-        console.log(account.address);
-        // Example of a contract function call
-        contract.methods.loginAccount(formData.email, formData.password)
-        .call({from: account.address})
-        .then(result => {
-                if(result){
-                    console.log('Login successful: ', result);
-                    alert('Login successful!');
-                    navigate('/appointment');
+        if (!web3) {
+            alert('Web3 is not initialized. Make sure MetaMask is installed.');
+            return;
+        }
+        if (!account) {
+            alert('Please connect to MetaMask.');
+            return;
+        }
+        else {
+            const address = "0xe78F5756BBa7A33C6ed4FF35e4941f71Ef6d249D";
+            const abi = [
+                {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "_email",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_password",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_confirmPassword",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "createAccount",
+                    "outputs": [],
+                    "stateMutability": "nonpayable",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "string",
+                            "name": "_email",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "string",
+                            "name": "_password",
+                            "type": "string"
+                        }
+                    ],
+                    "name": "loginAccount",
+                    "outputs": [
+                        {
+                            "internalType": "bool",
+                            "name": "",
+                            "type": "bool"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
+                },
+                {
+                    "inputs": [
+                        {
+                            "internalType": "address",
+                            "name": "",
+                            "type": "address"
+                        }
+                    ],
+                    "name": "users",
+                    "outputs": [
+                        {
+                            "internalType": "string",
+                            "name": "email",
+                            "type": "string"
+                        },
+                        {
+                            "internalType": "bytes32",
+                            "name": "hashedPassword",
+                            "type": "bytes32"
+                        }
+                    ],
+                    "stateMutability": "view",
+                    "type": "function"
                 }
-                else{
-                    alert('Login failed! Check username or password');
-                    console.log("no transaction errors");
-                }
-        }).catch(error => {
+            ];
+            const contract = new web3.eth.Contract(abi, address);
+            console.log(account);
+            // Example of a contract function call
+            contract.methods.loginAccount(formData.email, formData.password)
+                .call({from: account})
+                .then(result => {
+                    if (result) {
+                        console.log('Login successful: ', result);
+                        alert('Login successful!');
+                        navigate('/appointment');
+                    } else {
+                        alert('Login failed! Check username or password');
+                        console.log("no transaction errors");
+                    }
+                }).catch(error => {
                 console.error('Login failed: ', error);
-                if (error.receipt) {
-                  console.log('Transaction receipt: ', error.receipt); // Provides more details about the transaction failure
+                if (error.code === 4001) {
+                    // MetaMask error code for user rejected transaction
+                    alert('Login failed: Transaction rejected by user.');
+                } else if (error.message.includes('insufficient funds')) {
+                    alert('Login failed: Insufficient funds to complete the transaction.');
+                } else {
+                    alert('Login failed: Unexpected error occurred.');
                 }
-        });
+            });
+
+        }
         // Here you can add your logic to handle the registration,
     };
 
