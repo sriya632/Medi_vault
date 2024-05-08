@@ -5,16 +5,16 @@ const DoctorPage = () => {
   const [filter, setFilter] = useState('all');
 
   const doctors = [
-    { name: 'Thomas Henry', department: 'Cardiology', imageUrl: '/team/1.jpg', groups: ['cat1', 'cat2'] },
-    { name: 'Harrision Samuel', department: 'Radiology', imageUrl: '/team/2.jpg', groups: ['cat2'] },
-    { name: 'Alexandar James', department: 'Dental', imageUrl: '/team/3.jpg', groups: ['cat3'] },
-    { name: 'Edward john', department: 'Pediatry', imageUrl: '/team/4.jpg', groups: ['cat3', 'cat4'] },
-    { name: 'Thomas Henry', department: 'Neurology', imageUrl: '/team/1.jpg', groups: ['cat5'] },
+    { name: 'Thomas Henry', department: 'Cardiology', imageUrl: '/team/1.jpg', groups: ['cat1'] },
+    { name: 'Harrision Samuel', department: 'Radiology', imageUrl: '/team/2.jpg', groups: ['cat4'] },
+    { name: 'Alexandar James', department: 'Dental', imageUrl: '/team/3.jpg', groups: ['cat2'] },
+    { name: 'Edward john', department: 'Pediatry', imageUrl: '/team/4.jpg', groups: ['cat5'] },
+    { name: 'Thomas Henry', department: 'Neurology', imageUrl: '/team/1.jpg', groups: ['cat3'] },
     { name: 'Henry samuel', department: 'Palmology', imageUrl: '/team/3.jpg', groups: ['cat6'] },
-    { name: 'Thomas alexandar', department: 'Cardiology', imageUrl: '/team/1.jpg', groups: ['cat4'] },
-    { name: 'HarissonThomas', department: 'Traumatology', imageUrl: '/team/3.jpg', groups: ['cat5', 'cat6', 'cat1'] },
+    { name: 'Thomas alexandar', department: 'Cardiology', imageUrl: '/team/1.jpg', groups: ['cat1','cat6'] },
+    { name: 'HarissonThomas', department: 'Traumatology', imageUrl: '/team/3.jpg', groups: ['cat3','cat4', 'cat7', 'cat1'] },
     { name: 'Jonas Thomson', department: 'Cardiology', imageUrl: '/team/4.jpg', groups: ['cat2'] },
-    { name: 'Henry Forth', department: 'hematology', imageUrl: '/team/3.jpg', groups: ['cat5', 'cat6', 'cat1'] },
+    { name: 'Henry Forth', department: 'Hematology', imageUrl: '/team/3.jpg', groups: [ 'cat6', 'cat1'] },
     { name: 'Thomas Henry', department: 'Dental', imageUrl: '/team/4.jpg', groups: ['cat2'] }
     // Add the rest of the doctors data here
   ];
@@ -31,9 +31,7 @@ const DoctorPage = () => {
         </div>
       </div>
       <div className="content mt-3">
-        <h4 className="mb-0">
-          <a href="doctor-single.html">{doctor.name}</a>
-        </h4>
+        <h4 className="mb-0">{doctor.name}</h4>
         <p>{doctor.department}</p>
       </div>
     </div>
@@ -64,7 +62,7 @@ const DoctorPage = () => {
               <div className="section-title">
                 <h2>Doctors</h2>
                 <div className="divider mx-auto my-4"></div>
-                <p>We provide a wide range of creative services adipisicing elit. Autem maxime rem modi eaque, voluptate. Beatae officiis neque </p>
+                <p>A Comprehensive Directory of Visionary Doctors, Crafting Personalized Solutions for Your Well-being.</p>
               </div>
             </div>
           </div>
@@ -73,7 +71,35 @@ const DoctorPage = () => {
             <div className="btn-group btn-group-toggle" data-toggle="buttons">
               <label className={`btn ${filter === 'all' ? 'active' : ''}`}>
                 <input type="radio" name="shuffle-filter" value="all" checked={filter === 'all'} onChange={handleFilterChange} />
-                All Department
+                All Departments
+              </label>
+              <label className={`btn ${filter === 'cat1' ? 'active' : ''}`}>
+                <input type="radio" name="shuffle-filter" value="cat1" checked={filter === 'cat1'} onChange={handleFilterChange} />
+                Cardiology
+              </label>
+              <label className={`btn ${filter === 'cat2' ? 'active' : ''}`}>
+                <input type="radio" name="shuffle-filter" value="cat2" checked={filter === 'cat2'} onChange={handleFilterChange} />
+                Dental
+              </label>
+              <label className={`btn ${filter === 'cat3' ? 'active' : ''}`}>
+                <input type="radio" name="shuffle-filter" value="cat3" checked={filter === 'cat3'} onChange={handleFilterChange} />
+                Neurology
+              </label>
+              <label className={`btn ${filter === 'cat4' ? 'active' : ''}`}>
+                <input type="radio" name="shuffle-filter" value="cat4" checked={filter === 'cat4'} onChange={handleFilterChange} />
+                Radiology
+              </label>
+              <label className={`btn ${filter === 'cat5' ? 'active' : ''}`}>
+                <input type="radio" name="shuffle-filter" value="cat5" checked={filter === 'cat5'} onChange={handleFilterChange} />
+                Pediatrics
+              </label>
+              <label className={`btn ${filter === 'cat6' ? 'active' : ''}`}>
+                <input type="radio" name="shuffle-filter" value="cat6" checked={filter === 'cat6'} onChange={handleFilterChange} />
+                Medicine
+              </label>
+              <label className={`btn ${filter === 'cat7' ? 'active' : ''}`}>
+                <input type="radio" name="shuffle-filter" value="cat7" checked={filter === 'cat7'} onChange={handleFilterChange} />
+                Traumatology
               </label>
               {/* Add the rest of the filter buttons here */}
             </div>
@@ -97,7 +123,7 @@ const DoctorPage = () => {
               <div className="cta-content">
                 <div className="divider mb-4"></div>
                 <h2 className="mb-5 text-lg">
-                  We are pleased to offer you the <span className="title-color">chance to have the healthy</span>
+                  We are pleased to offer you the <span className="title-color">chance to have a great health</span>
                 </h2>
                 <Link to ="/appointment" className="btn btn-main-2 btn-round-full">
                   Get appointment

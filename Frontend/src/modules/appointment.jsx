@@ -360,11 +360,27 @@ const AppointmentPage = () => {
                 <h2 className="mb-2 title-color">Book an appointment</h2>
                 <p className="mb-4">
                   Book an appointment with a Doctor ensuring that you can secure a visit that fits your schedule, ultimately facilitating better access to necessary medical consultations and treatments.
+                  Book an appointment with a Doctor ensuring that you can secure a visit that fits your schedule, ultimately facilitating better access to necessary medical consultations and treatments.
                 </p>
                 <form id="#" className="appointment-form" onSubmit={handleSubmit}>
                   <div className="row">
                     <div className="col-lg-6">
                       <div className="form-group">
+                        <select
+                          className="form-control"
+                          id="exampleFormControlSelect1"
+                          name="department"
+                          onChange={handleChange}
+                          value={formData.department}
+                        >
+                          <option value="">Choose Department</option>
+                          <option value="Cardiology">Cardiology</option>
+                          <option value="Dental">Dental</option>
+                          <option value="Neurology">Neurology</option>
+                          <option value="Radiology">Radiology</option>
+                          <option value="Pediatrics">Pediatrics</option>
+                          <option value="Medicine">Medicine</option>
+                          <option value="Traumatology">Traumatology</option>
                         <select
                           className="form-control"
                           id="exampleFormControlSelect1"
@@ -458,6 +474,15 @@ const AppointmentPage = () => {
                     </div>
                   </div>
                   <div className="form-group-2 mb-4">
+                    <textarea
+                      name="message"
+                      id="message"
+                      className="form-control"
+                      rows="6"
+                      placeholder="Your Message"
+                      onChange={handleChange}
+                      value={formData.message}
+                    ></textarea>
                     <textarea
                       name="message"
                       id="message"

@@ -8,6 +8,8 @@ import AppointmentPage from './modules/appointment.jsx';
 import DoctorPage from './modules/doctor.jsx';
 import DoctorViewPage from './modules/doctor-view/doctor-view';
 import MutablePatientDetails from './modules/doctor-view/mutable-patient-details';
+import ServicePage from './modules/services.jsx';
+
 
 export default function App(){
   return (
@@ -21,6 +23,7 @@ export default function App(){
           <Route path="appointment" element={<AppointmentPage />} />
           <Route path="doctor" element={<DoctorPage/>} />
           <Route path="doctorView" element={<DoctorViewPage/>} />
+          <Route path="services" element={<ServicePage/>} />
           {/* assuming that we pass ID to differentiate between patients */}
           <Route path="patient/:id" element={<MutablePatientDetails />} />
         </Route>
