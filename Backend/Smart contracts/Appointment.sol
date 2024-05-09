@@ -6,7 +6,7 @@ contract AppointmentBook {
         uint256 id;
         string department;
         string doctor;
-        uint256 date;  // Unix timestamp for simplicity
+        uint256 date;  
         string patientName;
         string contactDetails;
         string message;
@@ -16,7 +16,7 @@ contract AppointmentBook {
     address public owner;
 
     constructor() {
-        owner = msg.sender;  // Set the owner as the contract deployer
+        owner = msg.sender;  
     }
 
     modifier onlyOwner() {
@@ -24,23 +24,23 @@ contract AppointmentBook {
         _;
     }
 
-    // Event to emit when a new appointment is created
+    
     event NewAppointment(uint256 id, string department, string doctor, string patientName);
 
-    // Function to create a new appointment
+    
     function createAppointment(string memory _department, string memory _doctor, uint256 _date, string memory _patientName, string memory _contactDetails, string memory _message) public onlyOwner {
         uint256 _id = appointments.length;
         appointments.push(Appointment(_id, _department, _doctor, _date, _patientName, _contactDetails, _message));
         emit NewAppointment(_id, _department, _doctor, _patientName);
     }
 
-    // Function to get appointment details
+    
     function getAppointment(uint256 _id) public view returns (Appointment memory) {
         require(_id < appointments.length, "Appointment does not exist!");
         return appointments[_id];
     }
 
-    // Function to update an existing appointment
+    
     function updateAppointment(uint256 _id, string memory _department, string memory _doctor, uint256 _date, string memory _patientName, string memory _contactDetails, string memory _message) public onlyOwner {
         require(_id < appointments.length, "Appointment does not exist!");
         Appointment storage appointment = appointments[_id];
