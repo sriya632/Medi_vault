@@ -1,4 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import Web3 from "web3";
+import {CONTRACT_ADDRESS,CONTRACT_ABI} from '../contract_constants/authentication.js';
+import {useNavigate} from "react-router-dom";
+
+function calculateAge(dob) {
+  if (!dob) return '';
+  const birthday = new Date(dob);
+  const today = new Date();
+  let age = today.getFullYear() - birthday.getFullYear();
+  const monthDiff = today.getMonth() - birthday.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
+    age--;
+  }
+  return age;
+}
 
 const ProfilePage = () => {
   const [formData, setFormData] = useState({
@@ -7,43 +22,133 @@ const ProfilePage = () => {
     email: '',
     dateOfBirth: '',
     bloodGroup: '',
+    age: '',
     gender: '',
     address: '',
     pastMedicalHistory: '',
   });
+  const navigate = useNavigate();
+  const [web3, setWeb3] = useState(null);
+  const [account, setAccount] = useState(null);
+  const [isDataFetched, setIsDataFetched] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
-  
   useEffect(() => {
-    const userData = localStorage.getItem('userData');
-    console.log('userData:', userData);
-    try {
-      const parsedUserData = JSON.parse(userData);
-      console.log('parsedUserData:', parsedUserData);
-      if (parsedUserData) {
-        setFormData(prevFormData => ({
-          ...prevFormData,
-          firstName: parsedUserData.firstName || prevFormData.firstName,
-          lastName: parsedUserData.lastName || prevFormData.lastName,
-          email: parsedUserData.email || prevFormData.email,
-        }));
-      }
-    } catch (error) {
-      console.error('Error parsing user data:', error);
+    if (window.ethereum) {
+      const web3Instance = new Web3(window.ethereum);
+      setWeb3(web3Instance);
+      connectWallet();
+    } else {
+      alert('Please install MetaMask to use this feature!');
     }
   }, []);
+
+  useEffect(() => {
+    if (account && web3) {
+      fetchUserDetails(account);
+    }
+  }, [account, web3]);
+
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setAccount(accounts[0]); // Assuming you only need the first account
+        console.log('Connected with account:', accounts[0]);
+      } catch (error) {
+        console.error('Error connecting to MetaMask', error);
+        alert('Failed to connect MetaMask. If you refused the connection, please allow it to interact with this dApp.');
+      }
+    } else {
+      alert('Please install MetaMask to use this feature!');
+    }
+  };
+
+  const fetchUserDetails = async (account) => {
+    const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+    try {
+      const userDetails = await contract.methods.getUserDetails(account).call();
+      const patientDetails = await contract.methods.getPatientDetails(account).call();
+
+      setFormData({
+        firstName: userDetails[0],
+        lastName: userDetails[1],
+        email: userDetails[2],
+        phoneNumber: userDetails[3],
+        gender: patientDetails[0],
+        age: patientDetails[1],
+        bloodGroup: patientDetails[2],
+        address: patientDetails[3],
+        pastMedicalHistory: patientDetails[4],
+      });
+      setIsDataFetched(true);
+    } catch (error) {
+      console.error('Error fetching user details:', error);
+      alert('Failed to fetch user details from the blockchain.');
+    }
+  };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
       ...prevState,
       [name]: value,
+      age: name === 'dateOfBirth' ? calculateAge(value) : prevState.age,
     }));
   };
 
+  const handleEdit = () => {
+    // Toggle edit mode, don't submit form
+    setIsDataFetched(false);
+    setEditMode(!editMode);
+  };
   const handleSubmit = (event) => {
     event.preventDefault();
     // Save the form data to the backend or localStorage
     console.log('Form Data:', formData);
+    if (!web3) {
+      alert('Web3 is not initialized. Make sure MetaMask is installed.');
+      return;
+    }
+    if (!account) {
+      alert('Please connect to MetaMask.');
+      return;
+    }
+    else {
+      if (editMode) {
+        try {
+          const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+          console.log(account);
+          // Example of a contract function call
+          contract.methods.addPatientDetails(formData.gender, formData.age, formData.bloodGroup, formData.address, formData.pastMedicalHistory)
+              .send({from: account, gas: 3000000})
+              .then(result => {
+                    console.log('Profile Saved', result)
+                    alert('Profile Saved!');
+                    navigate('/profile');
+                  }
+              )
+              .catch(error => {
+                console.error('Transaction failed: ', error);
+                if (error.receipt) {
+                  console.log('Transaction receipt: ', error.receipt); // Provides more details about the transaction failure
+                }
+              });
+        } catch (error) {
+          console.error(error);
+          if (error.code === 4001) {
+            // MetaMask error code for user rejected transaction
+            alert('Transaction failed! Please enter correct values.');
+          } else if (error.message.includes('insufficient funds')) {
+            // Insufficient funds error
+            alert('Transaction failed: Insufficient funds to complete the transaction.');
+          } else {
+            // Other unexpected errors
+            alert('Transaction failed: Unexpected error occurred.');
+          }
+        }
+      }
+    }
   };
 
   return (
@@ -59,7 +164,7 @@ const ProfilePage = () => {
             name="firstName"
             value={formData.firstName}
             onChange={handleChange}
-            readOnly
+            readOnly={isDataFetched}
           />
         </div>
         <div className="form-group">
@@ -71,7 +176,7 @@ const ProfilePage = () => {
             name="lastName"
             value={formData.lastName}
             onChange={handleChange}
-            readOnly
+            readOnly={isDataFetched}
           />
         </div>
         <div className="form-group">
@@ -83,7 +188,7 @@ const ProfilePage = () => {
             name="email"
             value={formData.email}
             onChange={handleChange}
-            readOnly
+            readOnly={isDataFetched}
           />
         </div>
         <div className="form-group">
@@ -95,16 +200,18 @@ const ProfilePage = () => {
             name="dateOfBirth"
             value={formData.dateOfBirth}
             onChange={handleChange}
+            readOnly={isDataFetched}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="bloodGroup">Blood Group</label>
+          <label htmlFor="Gender"> Gender</label>
           <select
             className="form-control"
             id="gender"
             name="gender"
             value={formData.gender}
             onChange={handleChange}
+            readOnly={isDataFetched}
           >
             <option value="">Select Gender</option>
             <option value="male">Male</option>
@@ -116,10 +223,11 @@ const ProfilePage = () => {
           <label htmlFor="blood group">Blood Group</label>
           <select
             className="form-control"
-            id="bloodGroupr"
+            id="bloodGroup"
             name="bloodGroup"
             value={formData.bloodGroup}
             onChange={handleChange}
+            readOnly={isDataFetched}
           >
             <option value="">Select Blood Group</option>
             <option value="a+ve">A +ve</option>
@@ -140,6 +248,7 @@ const ProfilePage = () => {
             name="address"
             value={formData.address}
             onChange={handleChange}
+            readOnly={isDataFetched}
           />
         </div>
         <div className="form-group">
@@ -150,11 +259,17 @@ const ProfilePage = () => {
             name="pastMedicalHistory"
             value={formData.pastMedicalHistory}
             onChange={handleChange}
+            readOnly={isDataFetched}
           />
         </div>
-        <button type="submit" className="btn btn-primary">
-          Save
+        <button type="button" onClick={handleEdit} className="btn btn-secondary">
+          {editMode ? 'Cancel' : 'Edit'}
         </button>
+        {editMode && (
+            <button type="submit" className="btn btn-primary">
+              Save
+            </button>
+        )}
       </form>
     </div>
   );
