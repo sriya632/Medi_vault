@@ -137,7 +137,7 @@ const AboutPage = () => {
 		<div className="row">
 			<div className="col-lg-3 col-md-6 col-sm-6">
 				<div className="team-block mb-5 mb-lg-0">
-					<img src="/team/1.jpg" alt="" class="img-fluid w-100"/>
+					<img src="/team/1.jpg" alt="" className="img-fluid w-100"/>
 
 					<div className="content">
 						<h4 className="mt-4 mb-0"><a href="doctor-single.html">John Marshal</a></h4>
@@ -148,7 +148,7 @@ const AboutPage = () => {
 
 			<div className="col-lg-3 col-md-6 col-sm-6">
 				<div clasName="team-block mb-5 mb-lg-0">
-					<img src="/team/2.jpg" alt="" class="img-fluid w-100"/>
+					<img src="/team/2.jpg" alt="" className="img-fluid w-100"/>
 
 					<div className="content">
 						<h4 className="mt-4 mb-0"><a href="doctor-single.html">Marshal Root</a></h4>
@@ -159,7 +159,7 @@ const AboutPage = () => {
 
 			<div className="col-lg-3 col-md-6 col-sm-6">
 				<div className="team-block mb-5 mb-lg-0">
-					<img src="/team/3.jpg" alt="" class="img-fluid w-100"/>
+					<img src="/team/3.jpg" alt="" className="img-fluid w-100"/>
 
 					<div className="content">
 						<h4 className="mt-4 mb-0"><a href="doctor-single.html">Siamon john</a></h4>
@@ -169,7 +169,7 @@ const AboutPage = () => {
 			</div>
 			<div className="col-lg-3 col-md-6 col-sm-6">
 				<div className="team-block">
-					<img src="/team/4.jpg" alt="" class="img-fluid w-100"/>
+					<img src="/team/4.jpg" alt="" className="img-fluid w-100"/>
 
 					<div className="content">
 						<h4 className="mt-4 mb-0"><a href="doctor-single.html">Rishat Ahmed</a></h4>

@@ -9,10 +9,12 @@ import DoctorPage from './modules/doctor.jsx';
 import DoctorViewPage from './modules/doctor-view/doctor-view';
 import MutablePatientDetails from './modules/doctor-view/mutable-patient-details';
 import ServicePage from './modules/services.jsx';
-
+import ProfilePage from './modules/profile.jsx';
+import { AuthProvider } from './modules/AuthContext.jsx';
 
 export default function App(){
   return (
+    <AuthProvider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
@@ -24,11 +26,13 @@ export default function App(){
           <Route path="doctor" element={<DoctorPage/>} />
           <Route path="doctorView" element={<DoctorViewPage/>} />
           <Route path="services" element={<ServicePage/>} />
+          <Route path="profile" element={<ProfilePage/>} />
           {/* assuming that we pass ID to differentiate between patients */}
           <Route path="patient/:id" element={<MutablePatientDetails />} />
         </Route>
       </Routes>
     </BrowserRouter>
+    </AuthProvider>
   );
 }
 

@@ -1,16 +1,17 @@
+
 import { useState, useEffect } from 'react';
 import Web3 from 'web3'
 import '../css/styles.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'slick-carousel/slick/slick.css'; 
 import 'slick-carousel/slick/slick-theme.css';
-import { FiEye } from "react-icons/fi";
-import { FiEyeOff } from "react-icons/fi";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext.jsx';
 
 const LoginForm = () => {
-
+    const {login } = useAuth();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -275,11 +276,9 @@ const LoginForm = () => {
             });
 
         }
-        // Here you can add your logic to handle the registration,
     };
-
+  
     return (
-        <>
         <section>
             <div className="auth-form-wrap">
                 <h2>Login to Your Account</h2>
@@ -314,7 +313,7 @@ const LoginForm = () => {
                             {showPassword ? <a ><FiEye /></a> : <a ><FiEyeOff /></a>} 
                         </div>
                         <div>
-                           <Link to={"/register"} className="text-sm">Register</Link><br />
+                            <Link to={"/register"} className="text-sm">Register</Link><br />
                             <Link to={"/doctorlogin"} className="text-sm">Are you an admin?</Link>
                         </div>
                     </div>
@@ -322,8 +321,8 @@ const LoginForm = () => {
                 </div>
             </div>
         </section>
-        </>
     );
 }
 
 export default LoginForm;
+

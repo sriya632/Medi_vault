@@ -7,9 +7,11 @@ import 'slick-carousel/slick/slick-theme.css';
 import { FiEye } from "react-icons/fi";
 import { FiEyeOff } from "react-icons/fi";
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from './AuthContext.jsx';
+
 
 const RegisterForm = () => {
-
+    const { register } = useAuth();
     const [formData, setFormData] = useState({
         FirstName: '',
         LastName: '',
@@ -289,6 +291,7 @@ const RegisterForm = () => {
             }
         }
     };
+
     return (
         <>
         <section>
@@ -379,6 +382,7 @@ const RegisterForm = () => {
         </section>
         </>
     );
+    register(userData);
 }
 
 export default RegisterForm;
