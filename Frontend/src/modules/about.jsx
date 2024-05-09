@@ -85,32 +85,32 @@ const AboutPage = () => {
 				<div className="row">
 					<div className="col-lg-4 col-md-6 col-sm-6">
 						<div className="award-img">
-							<img src="/about/3.png" alt="" class="img-fluid"/>
+							<img src="/about/3.png" alt="" className="img-fluid"/>
 						</div>
 					</div>
 					<div className="col-lg-4 col-md-6 col-sm-6">
 						<div className="award-img">
-							<img src="/about/4.png" alt="" class="img-fluid"/>
+							<img src="/about/4.png" alt="" className="img-fluid"/>
 						</div>
 					</div>
 					<div className="col-lg-4 col-md-6 col-sm-6">
 						<div className="award-img">
-							<img src="/about/1.png" alt="" class="img-fluid"/>
+							<img src="/about/1.png" alt="" className="img-fluid"/>
 						</div>
 					</div>
 					<div className="col-lg-4 col-md-6 col-sm-6">
 						<div className="award-img">
-							<img src="/about/2.png" alt="" class="img-fluid"/>
+							<img src="/about/2.png" alt="" className="img-fluid"/>
 						</div>
 					</div>
 					<div className="col-lg-4 col-md-6 col-sm-6">
 						<div className="award-img">
-							<img src="/about/5.png" alt="" class="img-fluid"/>
+							<img src="/about/5.png" alt="" className="img-fluid"/>
 						</div>
 					</div>
 					<div className="col-lg-4 col-md-6 col-sm-6">
 						<div className="award-img">
-							<img src="/about/6.png" alt="" class="img-fluid"/>
+							<img src="/about/6.png" alt="" className="img-fluid"/>
 						</div>
 					</div>
 				</div>

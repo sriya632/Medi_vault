@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import {useEffect, useState} from 'react';
 import Web3 from 'web3';
+import {useNavigate} from "react-router-dom";
+import {CONTRACT_ABI, CONTRACT_ADDRESS} from "../contract_constants/appointment.js";
 
 // doctors.js
 export const doctors = [
@@ -26,7 +28,11 @@ const AppointmentPage = () => {
     phone: '',
     message: ''
   });
+  const navigate = useNavigate();
   const [filteredDoctors, setFilteredDoctors] = useState([]); // New state for filtered doctors
+  //const navigate = useNavigate();
+  const [web3, setWeb3] = useState(null);
+  const [account, setAccount] = useState(null);
 
   const handleChange = (e) => {
     const { name, value } = event.target;
@@ -44,285 +50,74 @@ const AppointmentPage = () => {
     }
   };
 
-  const date = new Date(formData.date + 'T00:00:00Z'); // Appends 'T00:00:00Z' to set time to midnight UTC
-  const timestamp = Math.floor(date.getTime() / 1000);
+  const date = new Date(formData.date + 'T00:00:00Z'); // Ensures the date is at midnight UTC
+  const timestamp = Math.floor(date.getTime() / 1000); // Converts the date object to a Unix timestamp
 
-  const projectId = '6bc42b50d520477f99374ca081d7a0c5';
-  const infuraUrl = `https://polygon-amoy.infura.io/v3/6bc42b50d520477f99374ca081d7a0c5`;
-
-  const web3 = new Web3(new Web3.providers.HttpProvider(infuraUrl, {
-    headers: [{ name: "Authorization", value: "Basic "}]
-  }));
-
-
-  const address = "0xFDd2c0ffAcaf9ec53DBd3F49739De36fbe5Ad067";
-  const abi=[
-    {
-      "inputs": [
-        {
-          "internalType": "string",
-          "name": "_department",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_doctor",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_date",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "_patientName",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_contactDetails",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_message",
-          "type": "string"
-        }
-      ],
-      "name": "createAppointment",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
-      "anonymous": false,
-      "inputs": [
-        {
-          "indexed": false,
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "department",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "doctor",
-          "type": "string"
-        },
-        {
-          "indexed": false,
-          "internalType": "string",
-          "name": "patientName",
-          "type": "string"
-        }
-      ],
-      "name": "NewAppointment",
-      "type": "event"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_id",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "_department",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_doctor",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "_date",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "_patientName",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_contactDetails",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "_message",
-          "type": "string"
-        }
-      ],
-      "name": "updateAppointment",
-      "outputs": [],
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "",
-          "type": "uint256"
-        }
-      ],
-      "name": "appointments",
-      "outputs": [
-        {
-          "internalType": "uint256",
-          "name": "id",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "department",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "doctor",
-          "type": "string"
-        },
-        {
-          "internalType": "uint256",
-          "name": "date",
-          "type": "uint256"
-        },
-        {
-          "internalType": "string",
-          "name": "patientName",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "contactDetails",
-          "type": "string"
-        },
-        {
-          "internalType": "string",
-          "name": "message",
-          "type": "string"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [
-        {
-          "internalType": "uint256",
-          "name": "_id",
-          "type": "uint256"
-        }
-      ],
-      "name": "getAppointment",
-      "outputs": [
-        {
-          "components": [
-            {
-              "internalType": "uint256",
-              "name": "id",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "department",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "doctor",
-              "type": "string"
-            },
-            {
-              "internalType": "uint256",
-              "name": "date",
-              "type": "uint256"
-            },
-            {
-              "internalType": "string",
-              "name": "patientName",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "contactDetails",
-              "type": "string"
-            },
-            {
-              "internalType": "string",
-              "name": "message",
-              "type": "string"
-            }
-          ],
-          "internalType": "struct AppointmentBook.Appointment",
-          "name": "",
-          "type": "tuple"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
-    },
-    {
-      "inputs": [],
-      "name": "owner",
-      "outputs": [
-        {
-          "internalType": "address",
-          "name": "",
-          "type": "address"
-        }
-      ],
-      "stateMutability": "view",
-      "type": "function"
+  useEffect(() => {
+    if (window.ethereum) {
+      const web3Instance = new Web3(window.ethereum);
+      setWeb3(web3Instance);
+      connectWallet();
+    } else {
+      alert('Please install MetaMask to use this feature!');
     }
-  ]
-  const contract = new web3.eth.Contract(abi,address);
+  }, []);
 
-  const account = web3.eth.accounts.privateKeyToAccount('0x51a18a3afa87e9833a04d67dc201244f5e92fd17fd98d4221532281d5b21438c');
-  web3.eth.accounts.wallet.add(account);
-  web3.eth.defaultAccount = account.address;
+  const connectWallet = async () => {
+    if (window.ethereum) {
+      try {
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        setAccount(accounts[0]); // Assuming you only need the first account
+        console.log('Connected with account:', accounts[0]);
+      } catch (error) {
+        console.error('Error connecting to MetaMask', error);
+        alert('Failed to connect MetaMask. If you refused the connection, please allow it to interact with this dApp.');
+      }
+    } else {
+      alert('Please install MetaMask to use this feature!');
+    }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(formData);
+    if (!web3) {
+      alert('Web3 is not initialized. Make sure MetaMask is installed.');
+      return;
+    }
+    if (!account) {
+      alert('Please connect to MetaMask.');
+      return;
+    }
+    else {
     // Handle form submission logic here
     try {
       // Example of a contract function call
+      const contract = new web3.eth.Contract(CONTRACT_ABI,CONTRACT_ADDRESS);
       contract.methods.createAppointment(formData.department, formData.doctor,timestamp,
           formData.name, formData.phone, formData.message)
-          .send({from: account.address, gas: 3000000}).then(result => {
+          .send({from: account, gas: 3000000}).then(result => {
         console.log('Transaction successful: ', result);
-        alert('Appointment Created!');
-      })
-          .catch(error => {
-            console.error('Transaction failed: ', error);
-            
-            if (error.receipt) {
-              console.log('Transaction receipt: ', error.receipt); // Provides more details about the transaction failure
-            }
-          });
-
-      console.log("Can't book and appointment!", formData);
+        alert('Appointment Booked!');
+        navigate('/upcoming-appointments');
+      }).catch(error => {
+        console.error('Transaction failed: ', error);
+        if (error.code === 4001) {
+          // MetaMask error code for user rejected transaction
+          alert('Transaction failed: Transaction rejected by user.');
+        } else if (error.message.includes('insufficient funds')) {
+          alert('Transaction failed: Insufficient funds to complete the transaction.');
+        } else if(error.message.includes('unauthorized')){
+          alert('Unauthorized user');
+        }
+        else {
+          alert('Transaction failed: Unexpected error occurred.');
+        }
+      });
     } catch (error) {
       console.error(error);
-      alert('Registration failed. See console for details.');
+      alert('Appointment Booking failed. See console for details.');
+    }
     }
   };
 

@@ -1,6 +1,6 @@
 // src/constants/contractConstants.js
 
-export const CONTRACT_ADDRESS = "0x1FbF466F9a774474Ec6C0Ea374F44235FeF8A7E7";
+export const CONTRACT_ADDRESS = "0xB6eE62d39bC496a19b2D3E11fbC23Ce97B28ea2E";
 
 export const CONTRACT_ABI = [
     {
