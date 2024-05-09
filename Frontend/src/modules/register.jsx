@@ -79,7 +79,7 @@ const RegisterForm = () => {
         }
         else {
             try {
-                const address = "0xe78F5756BBa7A33C6ed4FF35e4941f71Ef6d249D";
+                const address = "0x960225dca38AE2Cb21fBC85426A0E610DeaF84FF";
                 const abi =  [
                     {
                         "inputs": [
