@@ -265,7 +265,8 @@ const RegisterForm = () => {
                     .send({from: account, gas: 3000000}).then(result => {
                     console.log('Transaction successful: ', result);
                     alert('Registration successful!');
-                    navigate('/appointment');
+                    
+                    navigate('/login');
                 })
                     .catch(error => {
                         console.error('Transaction failed: ', error);

@@ -258,7 +258,8 @@ const LoginForm = () => {
                     if (result) {
                         console.log('Login successful: ', result);
                         alert('Login successful!');
-                        navigate('/appointment');
+                        login();
+                        navigate('/profile');
                     } else {
                         alert('Login failed! Check username or password');
                         console.log("no transaction errors");

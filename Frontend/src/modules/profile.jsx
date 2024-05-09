@@ -14,14 +14,21 @@ const ProfilePage = () => {
 
   
   useEffect(() => {
-    const userData = JSON.parse(localStorage.getItem('userData'));
-    if (userData) {
-      setFormData(prevFormData => ({
-        ...prevFormData,
-        firstName: formData.firstName || prevFormData.firstName,
-        lastName: formData.lastName || prevFormData.lastName,
-        email: formData.email || prevFormData.email,
-      }));
+    const userData = localStorage.getItem('userData');
+    console.log('userData:', userData);
+    try {
+      const parsedUserData = JSON.parse(userData);
+      console.log('parsedUserData:', parsedUserData);
+      if (parsedUserData) {
+        setFormData(prevFormData => ({
+          ...prevFormData,
+          firstName: parsedUserData.firstName || prevFormData.firstName,
+          lastName: parsedUserData.lastName || prevFormData.lastName,
+          email: parsedUserData.email || prevFormData.email,
+        }));
+      }
+    } catch (error) {
+      console.error('Error parsing user data:', error);
     }
   }, []);
 
