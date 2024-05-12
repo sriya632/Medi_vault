@@ -42,7 +42,7 @@ const Layout = () => {
             </div>
             <nav className="navbar navbar-expand-lg navigation" id="navbar">
                 <div className="container">
-                    <a className="navbar-brand" href="index.html">
+                    <a className="navbar-brand" href="/">
                         <img src="logo.jpg" alt="" className="img-fluid" width="150" height="150"/>
                     </a>
                     <button className="navbar-toggler collapsed"type="button"data-toggle="collapse" data-target="#navbarmain"
@@ -53,7 +53,7 @@ const Layout = () => {
                     {/* Main Navigation Here */}
                     <div className="collapse navbar-collapse" id="navbarmain">
                         <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li>
+                            <li className="nav-item active"><a className="nav-link" href="/">Home</a></li>
                             <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/doctor">Doctors</Link></li>

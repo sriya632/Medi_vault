@@ -130,8 +130,8 @@ const LoginForm = () => {
                         />
                         <div onClick={togglePasswordVisibility} style={{ cursor: 'pointer', display: 'inline-block', marginTop: "10px"}}>
                             {showPassword ? 
-                                <div className='text-sm' style={{ display: 'inline-block', paddingRight: '8px' }}> Hide Password? </div> :
-                                <div className='text-sm' style={{ display: 'inline-block', paddingRight: '8px' }}> Show Password? </div>}
+                                <div id="hidePassword" className='text-sm' style={{ display: 'inline-block', paddingRight: '8px' }}> Hide Password? </div> :
+                                <div id="showPassword" className='text-sm' style={{ display: 'inline-block', paddingRight: '8px' }}> Show Password? </div>}
                             {showPassword ? <a ><FiEye /></a> : <a ><FiEyeOff /></a>} 
                         </div>
                         <div>
