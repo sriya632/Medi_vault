@@ -1,21 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
+import {useNavigate} from "react-router-dom";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../contract_constants/appointment.js";
+import { useAuth } from './AuthContext.jsx';
 
 const UpcomingAppointments = () => {
     const [appointments, setAppointments] = useState([]);
     const [account, setAccount] = useState(null);
     const [web3, setWeb3] = useState(null);
+    const { isAuthenticated, ethereumAccount } = useAuth();
+    const navigate = useNavigate();
 
     useEffect(() => {
-        if (window.ethereum) {
+        if (isAuthenticated && !web3 && window.ethereum) {
             const web3Instance = new Web3(window.ethereum);
             setWeb3(web3Instance);
-            connectWallet(web3Instance);
-        } else {
-            console.log("Please install MetaMask to use this feature!");
+            connectWallet();
+        } else if (!window.ethereum) {
+            alert('Please install MetaMask to use this feature!');
+        } else if (!isAuthenticated) {
+            alert('Please log in to view upcoming appointments.');
+            navigate('/login');
         }
-    }, []);
+    }, [isAuthenticated, web3]);
 
     const connectWallet = async (web3) => {
         try {
@@ -31,15 +38,21 @@ const UpcomingAppointments = () => {
         const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
         try {
             const appointmentData = await contract.methods.getAppointmentsByPatient(account).call();
-            setAppointments(appointmentData.map(app => ({
-                id: app.id,
-                department: app.department,
-                doctor: app.doctor,
-                date: new Date(app.date * 1000).toLocaleDateString(), // Assuming 'date' is a UNIX timestamp
-                patientName: app.patientName,
-                contactDetails: app.contactDetails,
-                message: app.message
-            })));
+            console.log("Raw appointment data:", appointmentData);
+            if (Array.isArray(appointmentData)) {
+                const formattedData = appointmentData.map(app => ({
+                    id: app.id.toString(), // Ensuring ID is a string
+                    department: app.department,
+                    doctor: app.doctor,
+                    date: new Date(parseInt(app.date, 10) * 1000).toLocaleDateString(),
+                    patientName: app.patientName,
+                    contactDetails: app.contactDetails,
+                    message: app.message
+                }));
+                setAppointments(formattedData);
+            } else {
+                console.error("Unexpected data format received:", appointmentData);
+            };
         } catch (error) {
             console.error("Error fetching appointments", error);
         }

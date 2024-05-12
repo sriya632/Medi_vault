@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import Web3 from 'web3';
 import {useNavigate} from "react-router-dom";
 import {CONTRACT_ABI, CONTRACT_ADDRESS} from "../contract_constants/appointment.js";
-
+import { useAuth } from './AuthContext.jsx';
 // doctors.js
 export const doctors = [
   { name: 'Thomas Henry', department: 'Cardiology' },
@@ -28,12 +28,13 @@ const AppointmentPage = () => {
     phone: '',
     message: ''
   });
+  const { isAuthenticated, ethereumAccount } = useAuth();
   const navigate = useNavigate();
   const [filteredDoctors, setFilteredDoctors] = useState([]); // New state for filtered doctors
   //const navigate = useNavigate();
   const [web3, setWeb3] = useState(null);
   const [account, setAccount] = useState(null);
-
+  const {login } = useAuth();
   const handleChange = (e) => {
     const { name, value } = event.target;
     setFormData(prevState => ({
@@ -54,14 +55,17 @@ const AppointmentPage = () => {
   const timestamp = Math.floor(date.getTime() / 1000); // Converts the date object to a Unix timestamp
 
   useEffect(() => {
-    if (window.ethereum) {
+    if (isAuthenticated && !web3 && window.ethereum) {
       const web3Instance = new Web3(window.ethereum);
       setWeb3(web3Instance);
       connectWallet();
-    } else {
+    } else if (!window.ethereum) {
       alert('Please install MetaMask to use this feature!');
+    } else if (!isAuthenticated) {
+      alert('Please log in to book an appointment.');
+      navigate('/login');
     }
-  }, []);
+  }, [isAuthenticated, web3]);
 
   const connectWallet = async () => {
     if (window.ethereum) {
@@ -95,7 +99,7 @@ const AppointmentPage = () => {
       // Example of a contract function call
       const contract = new web3.eth.Contract(CONTRACT_ABI,CONTRACT_ADDRESS);
       contract.methods.createAppointment(formData.department, formData.doctor,timestamp,
-          formData.name, formData.phone, formData.message)
+          account,formData.name, formData.phone, formData.message)
           .send({from: account, gas: 3000000}).then(result => {
         console.log('Transaction successful: ', result);
         alert('Appointment Booked!');

@@ -1,6 +1,6 @@
 // src/constants/contractConstants.js
 
-export const CONTRACT_ADDRESS = "0x1883f1a205368f690A4C85C74f3ECaC1253448b9";
+export const CONTRACT_ADDRESS = "0x22ab786267e3288Dd0cC332d2e5C38dF3C44973d";
 
 export const CONTRACT_ABI =[
     {
@@ -28,6 +28,12 @@ export const CONTRACT_ABI =[
                 "internalType": "string",
                 "name": "doctor",
                 "type": "string"
+            },
+            {
+                "indexed": false,
+                "internalType": "address",
+                "name": "patientAddress",
+                "type": "address"
             },
             {
                 "indexed": false,
@@ -70,6 +76,11 @@ export const CONTRACT_ABI =[
                 "type": "uint256"
             },
             {
+                "internalType": "address",
+                "name": "patientAddress",
+                "type": "address"
+            },
+            {
                 "internalType": "string",
                 "name": "patientName",
                 "type": "string"
@@ -104,6 +115,11 @@ export const CONTRACT_ABI =[
                 "internalType": "uint256",
                 "name": "_date",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_patientAddress",
+                "type": "address"
             },
             {
                 "internalType": "string",
@@ -157,6 +173,11 @@ export const CONTRACT_ABI =[
                         "internalType": "uint256",
                         "name": "date",
                         "type": "uint256"
+                    },
+                    {
+                        "internalType": "address",
+                        "name": "patientAddress",
+                        "type": "address"
                     },
                     {
                         "internalType": "string",
@@ -215,6 +236,11 @@ export const CONTRACT_ABI =[
                         "type": "uint256"
                     },
                     {
+                        "internalType": "address",
+                        "name": "patientAddress",
+                        "type": "address"
+                    },
+                    {
                         "internalType": "string",
                         "name": "patientName",
                         "type": "string"
@@ -241,9 +267,9 @@ export const CONTRACT_ABI =[
     {
         "inputs": [
             {
-                "internalType": "string",
-                "name": "_patientName",
-                "type": "string"
+                "internalType": "address",
+                "name": "_patientAddress",
+                "type": "address"
             }
         ],
         "name": "getAppointmentsByPatient",
@@ -271,6 +297,11 @@ export const CONTRACT_ABI =[
                         "type": "uint256"
                     },
                     {
+                        "internalType": "address",
+                        "name": "patientAddress",
+                        "type": "address"
+                    },
+                    {
                         "internalType": "string",
                         "name": "patientName",
                         "type": "string"
@@ -289,6 +320,19 @@ export const CONTRACT_ABI =[
                 "internalType": "struct AppointmentBook.Appointment[]",
                 "name": "",
                 "type": "tuple[]"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [],
+        "name": "getAppointmentsCount",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",
@@ -328,6 +372,11 @@ export const CONTRACT_ABI =[
                 "internalType": "uint256",
                 "name": "_date",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "_patientAddress",
+                "type": "address"
             },
             {
                 "internalType": "string",

@@ -6,9 +6,11 @@ export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [ethereumAccount, setEthereumAccount] = useState(null);
 
-  const login = () => {
+  const login = (account) => {
     setIsAuthenticated(true);
+    setEthereumAccount(account); // Set the connected Ethereum account on login
   };
 
   const register = (userData) => {
@@ -19,10 +21,11 @@ export const AuthProvider = ({ children }) => {
   const logout = () => {
     localStorage.removeItem('userData');
     setIsAuthenticated(false);
+    setEthereumAccount(null); // Clear the Ethereum account on logout
   };
 
   return (
-    <AuthContext.Provider value={{ isAuthenticated, login, register, logout }}>
+    <AuthContext.Provider value={{ isAuthenticated, ethereumAccount, login, register, logout }}>
       {children}
     </AuthContext.Provider>
   );
