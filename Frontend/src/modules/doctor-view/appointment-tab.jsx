@@ -57,7 +57,8 @@ const AppointmentTab = () => {
         try {
             const fetchedAppointments = await contract.methods.getAppointmentsByDoctor(doctorName).call();
             setAppointments(fetchedAppointments.map(app => ({
-                id: app.id.toString(),
+                id: app.patientAddress.toString(),
+                u_id: app.id.toString(),
                 patientName: app.patientName,
                 date: new Date(parseInt(app.date, 10) * 1000).toLocaleDateString(),
                 time: 'Time Placeholder' // Update as necessary
@@ -87,7 +88,7 @@ const AppointmentTab = () => {
                             <td>{appointment.date}</td>
                             <td>{appointment.time}</td>
                             <td>
-                                <Link to={`/patient/${appointment.id}`} className="btn btn-primary btn-sm">View Details</Link>
+                                <Link to={`/patient/${appointment.id}/${appointment.u_id}`} className="btn btn-primary btn-sm">View Details</Link>
                             </td>
                         </tr>
                     ))}

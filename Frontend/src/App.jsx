@@ -31,7 +31,7 @@ export default function App(){
           <Route path="profile" element={<ProfilePage/>} />
           <Route path="doctorlogin" element={<DoctorLoginPage/>} />
           {/* assuming that we pass ID to differentiate between patients */}
-          <Route path="patient/:id" element={<MutablePatientDetails />} />
+          <Route path="patient/:id/:u_id" element={<MutablePatientDetails />} />
           <Route path="/upcoming-appointments" element={<UpcomingAppointments />} />
           <Route path="/past-appointments" element={<PastAppointments />} />
         </Route>
