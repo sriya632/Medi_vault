@@ -5,7 +5,6 @@ import AppointmentTab from './appointment-tab';
 const DoctorViewPage = () => {
     // State to manage active tab
     const [activeTab, setActiveTab] = useState('appointment');
-
     // Function to handle tab change
     const handleTabChange = (tab) => {
         setActiveTab(tab);

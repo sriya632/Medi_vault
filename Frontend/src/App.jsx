@@ -13,7 +13,7 @@ import ProfilePage from './modules/profile.jsx';
 import { AuthProvider } from './modules/AuthContext.jsx';
 import UpcomingAppointments from './modules/Upcomingappointments.jsx';
 import PastAppointments from './modules/PastAppointments.jsx'
-
+import DoctorLoginPage from './modules/doctorlogin.jsx';
 export default function App(){
   return (
     <AuthProvider>
@@ -29,8 +29,9 @@ export default function App(){
           <Route path="doctorView" element={<DoctorViewPage/>} />
           <Route path="services" element={<ServicePage/>} />
           <Route path="profile" element={<ProfilePage/>} />
+          <Route path="doctorlogin" element={<DoctorLoginPage/>} />
           {/* assuming that we pass ID to differentiate between patients */}
-          <Route path="patient/:id" element={<MutablePatientDetails />} />
+          <Route path="patient/:id/:u_id" element={<MutablePatientDetails />} />
           <Route path="/upcoming-appointments" element={<UpcomingAppointments />} />
           <Route path="/past-appointments" element={<PastAppointments />} />
         </Route>
