@@ -46,10 +46,42 @@ describe('Link Functionality', () => {
     cy.url().should('include', 'http://localhost:3000/login');
   });
 
-  it('should navigate to register page', () => {
+  it('should navigate to doctorlogin page', () => {
     cy.get('a').contains("Are you an admin?").click();
     cy.url().should('include', 'http://localhost:3000/doctorlogin');
     cy.go('back');
     cy.url().should('include', 'http://localhost:3000/login');
+  });
+});
+
+describe('Unauthorized User Actions', () => {
+  it('should not be able to go to book-appointments page', () => {
+    cy.get('#appointment-dropdown').realHover().then($el=>{
+      cy.wrap($el).invoke('show')
+      cy.wrap($el).contains('Book Appointment').click()
+    })
+    cy.on('window:alert', (alertText) => {
+      expect(alertText).to.contain('Please log in');
+    });
+  });
+
+  it('should not be able to go to upcoming-appointments page', () => {
+    cy.get('#appointment-dropdown').realHover().then($el=>{
+      cy.wrap($el).invoke('show')
+      cy.wrap($el).contains('Upcoming Appointment').click()
+    })
+    cy.on('window:alert', (alertText) => {
+      expect(alertText).to.contain('Please log in');
+    });
+  });
+
+  it('should not be able to go to past-appointments page', () => {
+    cy.get('#appointment-dropdown').realHover().then($el=>{
+      cy.wrap($el).invoke('show')
+      cy.wrap($el).contains('Past Appointment').click()
+    })
+    cy.on('window:alert', (alertText) => {
+      expect(alertText).to.contain('Please log in');
+    });
   });
 });
