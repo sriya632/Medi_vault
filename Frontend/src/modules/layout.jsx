@@ -53,13 +53,13 @@ const Layout = () => {
                     {/* Main Navigation Here */}
                     <div className="collapse navbar-collapse" id="navbarmain">
                         <ul className="navbar-nav ml-auto">
-                            <li className="nav-item active"><a className="nav-link" href="/">Home</a></li>
+                            <li className="nav-item active"><Link className="nav-link" href="/">Home</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/doctor">Doctors</Link></li>
                             {/* <li className="nav-item"><Link className="nav-link" to="/appointment">Appointment</Link></li>
                             {/* Navigation links */}
-                            <li className="nav-item dropdown">
+                            <li className="nav-item dropdown" id="appointment-dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
