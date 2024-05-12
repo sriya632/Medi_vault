@@ -52,18 +52,32 @@ const Layout = () => {
 
                     {/* Main Navigation Here */}
                     <div className="collapse navbar-collapse" id="navbarmain">
-                    <ul className="navbar-nav ml-auto">
+                        <ul className="navbar-nav ml-auto">
                             <li className="nav-item active"><a className="nav-link" href="index.html">Home</a></li>
                             <li className="nav-item"><Link className="nav-link" to="/about">About</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/services">Services</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/doctor">Doctors</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/appointment">Appointment</Link></li>
+                            {/* <li className="nav-item"><Link className="nav-link" to="/appointment">Appointment</Link></li>
                             {/* Navigation links */}
-                
-                {isAuthenticated ? (
+                            <li className="nav-item dropdown">
+                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                                   role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Appointments
+                                </a>
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <Link className="dropdown-item" to="/appointment">Book Appointment</Link>
+                                    <Link className="dropdown-item" to="/upcoming-appointments">Upcoming
+                                        Appointments</Link>
+                                    <Link className="dropdown-item" to="/past-appointments">Past Appointments</Link>
+                                </div>
+                            </li>
+                            {isAuthenticated ? (
                                 <>
-                                    <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link></li>
-                                    <li className="nav-item"><Link className="nav-link " to="/about" onClick={handleLogout}>Logout</Link></li>
+                                    <li className="nav-item"><Link className="nav-link" to="/profile">Profile</Link>
+                                    </li>
+                                    <li className="nav-item"><Link className="nav-link " to="/about"
+                                                                   onClick={handleLogout}>Logout</Link></li>
                                 </>
                             ) : (
                                 <li className="nav-item"><Link className="nav-link" to="/login">Login</Link></li>
@@ -74,19 +88,20 @@ const Layout = () => {
             </nav>
         </header>
 
-        {/* Any component passed into Layout will render here in the middle */}
-        <Outlet />
+            {/* Any component passed into Layout will render here in the middle */}
+            <Outlet/>
 
-        <footer className="footer section gray-bg">
-            <div className="container">
-                <div className="row">
-                    <div className="col-lg-4 mr-auto col-sm-6">
-                        <div className="widget mb-5 mb-lg-0">
-                            <div className="logo mb-4">
-                                <img src="logo.png" alt="" className="img-fluid" />
-                            </div>
-                            <p>We are Medivault and we made this website. Please give us an A for this class, thank you.</p>
-                            <ul className="list-inline footer-socials mt-4">
+            <footer className="footer section gray-bg">
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-4 mr-auto col-sm-6">
+                            <div className="widget mb-5 mb-lg-0">
+                                <div className="logo mb-4">
+                                    <img src="logo.png" alt="" className="img-fluid"/>
+                                </div>
+                                <p>We are Medivault and we made this website. Please give us an A for this class, thank
+                                    you.</p>
+                                <ul className="list-inline footer-socials mt-4">
                                 <li className="list-inline-item">
                                     <a href="https://www.facebook.com">
                                         <FaFacebook />

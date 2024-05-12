@@ -11,6 +11,8 @@ import MutablePatientDetails from './modules/doctor-view/mutable-patient-details
 import ServicePage from './modules/services.jsx';
 import ProfilePage from './modules/profile.jsx';
 import { AuthProvider } from './modules/AuthContext.jsx';
+import UpcomingAppointments from './modules/Upcomingappointments.jsx';
+import PastAppointments from './modules/PastAppointments.jsx'
 
 export default function App(){
   return (
@@ -29,6 +31,8 @@ export default function App(){
           <Route path="profile" element={<ProfilePage/>} />
           {/* assuming that we pass ID to differentiate between patients */}
           <Route path="patient/:id" element={<MutablePatientDetails />} />
+          <Route path="/upcoming-appointments" element={<UpcomingAppointments />} />
+          <Route path="/past-appointments" element={<PastAppointments />} />
         </Route>
       </Routes>
     </BrowserRouter>
