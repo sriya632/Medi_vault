@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Web3 from 'web3';
+import {useNavigate} from "react-router-dom";
+import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../../contract_constants/appointment.js";
+import { Link } from 'react-router-dom';
+import { useAuth } from '.././AuthContext.jsx';
 
 const MutablePatientDetails = () => {
 
@@ -21,6 +26,44 @@ const MutablePatientDetails = () => {
         previousHealthIssues: ['Hypertension', 'Diabetes', 'Asthma'],
         doctorsComments: 'No major issues observed. Patient is advised to monitor blood pressure regularly.',
     });
+
+    useEffect(() => {
+        if (window.ethereum) {
+            const web3Instance = new Web3(window.ethereum);
+            setWeb3(web3Instance);
+            connectWallet();
+        } else {
+            alert('Please install MetaMask to use this feature!');
+        }
+    }, []);
+
+    useEffect(() => {
+        if (account && web3) {
+            getDoctorName(account);
+        }
+    }, [account, web3]);
+
+    const connectWallet = async () => {
+        try {
+            const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+            setAccount(accounts[0]); // Assuming you only need the first account
+
+        } catch (error) {
+            console.error("Error connecting to MetaMask", error);
+        }
+    };
+
+    const getPatientDetails = async (account) => {
+        const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
+        try {
+            const doctorName = await contract.methods.getDoctorName(account).call();
+            console.log(doctorName);
+            fetchAppointments(doctorName, account);
+        }
+        catch(error){
+            console.error("Error fetching appointments", error);
+        }
+    };
 
     const handleCommentChange = (event) => {
         setPatient(prevPatient => ({

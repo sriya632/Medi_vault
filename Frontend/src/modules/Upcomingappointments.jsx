@@ -1,16 +1,15 @@
-// UpcomingAppointments.jsx
 import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../contract_constants/appointment.js";
 import { useAuth } from './AuthContext.jsx';
 
 const UpcomingAppointments = () => {
-  const [appointments, setAppointments] = useState([]);
-  const [account, setAccount] = useState(null);
-  const [web3, setWeb3] = useState(null);
-  const { isAuthenticated, ethereumAccount } = useAuth();
-  const navigate = useNavigate();
+    const [appointments, setAppointments] = useState([]);
+    const [account, setAccount] = useState(null);
+    const [web3, setWeb3] = useState(null);
+    const { isAuthenticated, ethereumAccount } = useAuth();
+    const navigate = useNavigate();
 
   useEffect(() => {
     if (isAuthenticated && !web3 && window.ethereum) {
@@ -25,15 +24,20 @@ const UpcomingAppointments = () => {
     }
   }, [isAuthenticated, web3]);
 
-  const connectWallet = async (web3) => {
-    try {
-      const accounts = await web3.eth.requestAccounts();
-      setAccount(accounts[0]);
-      fetchAppointments(accounts[0], web3);
-    } catch (error) {
-      console.error("Error connecting to MetaMask", error);
-    }
-  };
+    useEffect(() => {
+        if (account && web3) {
+            fetchAppointments(account, web3);
+        }
+    }, [account, web3]);
+
+    const connectWallet = async (web3) => {
+        try {
+            const accounts = await web3.eth.requestAccounts();
+            setAccount(accounts[0]); // Assuming you only need the first account
+        } catch (error) {
+            console.error("Error connecting to MetaMask", error);
+        }
+    };
 
   const fetchAppointments = async (account, web3) => {
     const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
