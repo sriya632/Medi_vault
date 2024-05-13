@@ -63,7 +63,6 @@ const PastAppointments = () => {
       console.error("Error fetching appointments", error);
     }
   };
-
   const fetchComments = async (appointmentId,web3) => {
     const contract = new web3.eth.Contract(D_P_CONTRACT_ABI, D_P_CONTRACT_ADDRESS);
     try {

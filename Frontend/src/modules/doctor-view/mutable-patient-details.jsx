@@ -41,8 +41,6 @@ const MutablePatientDetails = () => {
             fetchComments(u_id);
         }
     }, [account, web3, u_id]);
-
-
     const connectWallet = async () => {
         try {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });

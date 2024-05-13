@@ -169,7 +169,7 @@ const AppointmentPage = () => {
                         <div className="form-group">
                           <select
                               className="form-control"
-                              id="exampleFormControlSelect1"
+                              id="department-select"
                               name="department"
                               onChange={handleChange}
                               value={formData.department}
@@ -189,7 +189,7 @@ const AppointmentPage = () => {
                         <div className="form-group">
                           <select
                               className="form-control"
-                              id="exampleFormControlSelect2"
+                              id="doctor-select"
                               name="doctor"
                               onChange={handleChange}
                               value={formData.doctor}

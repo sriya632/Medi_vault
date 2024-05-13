@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import Web3 from 'web3'
 import GoogleLogin from 'react-google-login';
@@ -79,6 +80,7 @@ const DoctorLoginPage = () => {
           clientId="YOUR_GOOGLE_CLIENT_ID"
           render={(renderProps) => (
             <button
+              id="google-login"
               className="btn btn-primary btn-block"
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
@@ -92,6 +94,7 @@ const DoctorLoginPage = () => {
       </div>
       <div>
         <button
+          id="metamask-login"
           className="btn btn-secondary btn-block"
           onClick={handleMetamaskLogin}
         >

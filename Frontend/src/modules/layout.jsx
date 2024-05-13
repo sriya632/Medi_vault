@@ -42,7 +42,7 @@ const Layout = () => {
             </div>
             <nav className="navbar navbar-expand-lg navigation" id="navbar">
                 <div className="container">
-                    <a className="navbar-brand" href="index.html">
+                    <a className="navbar-brand" href="/">
                         <img src="logo.jpg" alt="" className="img-fluid" width="150" height="150"/>
                     </a>
                     <button className="navbar-toggler collapsed"type="button"data-toggle="collapse" data-target="#navbarmain"
@@ -59,7 +59,7 @@ const Layout = () => {
                             <li className="nav-item"><Link className="nav-link" to="/doctor">Doctors</Link></li>
                             {/* <li className="nav-item"><Link className="nav-link" to="/appointment">Appointment</Link></li>
                             {/* Navigation links */}
-                            <li className="nav-item dropdown">
+                            <li className="nav-item dropdown" id="appointment-dropdown">
                                 <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
                                    role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
