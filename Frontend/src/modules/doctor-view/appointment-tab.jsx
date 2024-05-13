@@ -61,7 +61,7 @@ const AppointmentTab = () => {
                 u_id: app.id.toString(),
                 patientName: app.patientName,
                 date: new Date(parseInt(app.date, 10) * 1000).toLocaleDateString(),
-                time: 'Time Placeholder' // Update as necessary
+                time: new Date(parseInt(app.date, 10) * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) // Update as necessary
             })));
 
         } catch (error) {

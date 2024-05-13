@@ -3,24 +3,11 @@ import Web3 from "web3";
 import {CONTRACT_ADDRESS,CONTRACT_ABI} from '../contract_constants/authentication.js';
 import {useNavigate} from "react-router-dom";
 
-function calculateAge(dob) {
-  if (!dob) return '';
-  const birthday = new Date(dob);
-  const today = new Date();
-  let age = today.getFullYear() - birthday.getFullYear();
-  const monthDiff = today.getMonth() - birthday.getMonth();
-  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthday.getDate())) {
-    age--;
-  }
-  return age;
-}
-
 const ProfilePage = () => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
     email: '',
-    dateOfBirth: '',
     bloodGroup: '',
     age: '',
     gender: '',
@@ -64,6 +51,7 @@ const ProfilePage = () => {
     }
   };
 
+
   const fetchUserDetails = async (account) => {
     const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
     try {
@@ -92,16 +80,16 @@ const ProfilePage = () => {
     const { name, value } = event.target;
     setFormData((prevState) => ({
       ...prevState,
-      [name]: value,
-      age: name === 'dateOfBirth' ? calculateAge(value) : prevState.age,
+      [name]: value
     }));
   };
 
   const handleEdit = () => {
     // Toggle edit mode, don't submit form
     setIsDataFetched(false);
-    setEditMode(!editMode);
+    setEditMode(true);
   };
+
   const handleSubmit = (event) => {
     event.preventDefault();
     // Save the form data to the backend or localStorage
@@ -125,7 +113,8 @@ const ProfilePage = () => {
               .then(result => {
                     console.log('Profile Saved', result)
                     alert('Profile Saved!');
-                    navigate('/profile');
+                    setEditMode(false);
+                    setIsDataFetched(true)
                   }
               )
               .catch(error => {
@@ -192,13 +181,13 @@ const ProfilePage = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="dateOfBirth">Date of Birth</label>
+          <label htmlFor="Age">Age</label>
           <input
-            type="date"
+            type="text"
             className="form-control"
-            id="dateOfBirth"
-            name="dateOfBirth"
-            value={formData.dateOfBirth}
+            id="age"
+            name="age"
+            value={formData.age}
             onChange={handleChange}
             readOnly={isDataFetched}
           />
@@ -230,14 +219,14 @@ const ProfilePage = () => {
             readOnly={isDataFetched}
           >
             <option value="">Select Blood Group</option>
-            <option value="a+ve">A +ve</option>
-            <option value="a-ve">A -ve</option>
-            <option value="b+ve">B +ve</option>
-            <option value="b-ve">B -ve</option>
-            <option value="ab+ve">AB +ve</option>
-            <option value="ab-ve">AB -ve</option>
-            <option value="o+ve">O +ve</option>
-            <option value="o-ve">O -ve</option>
+            <option value="A+ve">A +ve</option>
+            <option value="A-ve">A -ve</option>
+            <option value="B+ve">B +ve</option>
+            <option value="B-ve">B -ve</option>
+            <option value="AB+ve">AB +ve</option>
+            <option value="AB-ve">AB -ve</option>
+            <option value="O+ve">O +ve</option>
+            <option value="O-ve">O -ve</option>
           </select>
         </div>
         <div className="form-group">
