@@ -53,14 +53,14 @@ SYMBOL='MATIC'
 BLOCK_EXPLORER='https://amoy.polygonscan.com/'
 ```
 - Access the private key by going to:
-- - metamask extension
-- - 3 dots top right
-- - account details
-- - show private key
+  - metamask extension
+  - 3 dots top right
+  - account details
+  - show private key
 - cd Medi_vault/Frontend
 - npm i
 - npx synress run
-- - also add on '-no-video' to the end of the command to get the test runs without recording them
+  - also add on '-no-video' to the end of the command to get the test runs without recording them
 
 
 
