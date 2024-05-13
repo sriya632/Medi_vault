@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Web3 from 'web3';
 import { useNavigate } from "react-router-dom";
 import { CONTRACT_ABI, CONTRACT_ADDRESS } from "../contract_constants/appointment.js";
+import { D_P_CONTRACT_ABI, D_P_CONTRACT_ADDRESS } from "../contract_constants/DoctorComments.js";
 import { useAuth } from './AuthContext.jsx';
 
 const PastAppointments = () => {
@@ -37,27 +38,39 @@ const PastAppointments = () => {
 
   const fetchAppointments = async (account, web3) => {
     const contract = new web3.eth.Contract(CONTRACT_ABI, CONTRACT_ADDRESS);
-    try {
+    try{
       const appointmentData = await contract.methods.getAppointmentsByPatient(account).call();
-      console.log("Raw appointment data:", appointmentData);
       if (Array.isArray(appointmentData)) {
-        const formattedData = appointmentData
-          .map(app => ({
+        // Process each appointment to fetch comments
+        const promises = appointmentData.map(async (app) => {
+          const comments = await fetchComments(app.id, web3);
+          return {
             id: app.id.toString(),
             department: app.department,
             doctor: app.doctor,
             date: new Date(parseInt(app.date, 10) * 1000),
             patientName: app.patientName,
             contactDetails: app.contactDetails,
-            message: app.message
-          }))
-          .filter(app => app.date <= new Date());
-        setAppointments(formattedData);
-      } else {
-        console.error("Unexpected data format received:", appointmentData);
+            message: app.message,
+            comments: comments || "No comments available or missed an appointment"
+          };
+        });
+        const results = await Promise.all(promises);
+        const pastAppointments = results.filter(app => app.date <= new Date());
+        setAppointments(pastAppointments);
       }
-    } catch (error) {
+      } catch (error) {
       console.error("Error fetching appointments", error);
+    }
+  };
+
+  const fetchComments = async (appointmentId,web3) => {
+    const contract = new web3.eth.Contract(D_P_CONTRACT_ABI, D_P_CONTRACT_ADDRESS);
+    try {
+      const comments = await contract.methods.viewComment(appointmentId).call();
+      return comments;
+    } catch (error) {
+      console.error("Failed to fetch comments:", error);
     }
   };
 
@@ -75,6 +88,7 @@ const PastAppointments = () => {
               <th>Patient Name</th>
               <th>Contact Details</th>
               <th>Reason</th>
+              <th>Doctor Comments</th>
             </tr>
           </thead>
           <tbody>
@@ -87,6 +101,7 @@ const PastAppointments = () => {
                 <td>{appointment.patientName}</td>
                 <td>{appointment.contactDetails}</td>
                 <td>{appointment.message}</td>
+                <td>{appointment.comments}</td>
               </tr>
             ))}
           </tbody>
