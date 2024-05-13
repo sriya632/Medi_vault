@@ -19,6 +19,8 @@ describe('Login functionality', () => {
 
     it('should login and redirect on metamask button', () => {
         cy.get('#metamask-login').click();
+        cy.switchToMetamaskNotification()
+        cy.acceptMetamaskAccess()
         cy.url().should('eq', 'http://localhost:3000/doctorView');
     });
   })
