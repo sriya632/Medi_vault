@@ -24,6 +24,20 @@ To initalize frontend:
 
 running the application :
 
+- click on login , if you are new user you need to register first(note: You can only create one account using one account address)
+- once registration is done you can login using those credentials 
+- all the features are shown in the demo video
+
+Running Test Cases :
+Backend:
+- for running backend testcases you need remix , an online compiler where we can run and test smart contracts .
+- https://remix.ethereum.org/#lang=en&optimize=false&runs=200&evmVersion=null&version=soljson-v0.8.25+commit.b61c2a91.js -  this is link to remix 
+- here is a small tutorial on how to work on remix -https://youtu.be/vH8T3In6ZkE?si=ilPonJOjWJXPSciG
+- for running smart contract testcases you need two files , one is smart contract file and another is smart contrat test file.
+- All smart contracts are available in Backend folder in the application directory and all smart contract test cases file are there in test_files_backend folder.
+- you need to import all smart contracts and smart contracts test files into remix. Then should start deploying and testing.
+- 
+
 
 
 
