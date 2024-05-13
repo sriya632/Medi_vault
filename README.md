@@ -38,7 +38,29 @@ Backend:
 - you need to import all smart contracts and smart contracts test files into remix. Then should start deploying and testing.
 - 
 
+Frontend:
+- create a .env file in the Medi_vault/Frontend directory
+- populate it with:
+```
+CYPRESS_REMOTE_DEBUGGING_PORT=9222
+PASSWORD={INSERT YOUR PASSWORD TO YOUR METAMASK ACCOUNT HERE WITHOUT THE BRACKETS}
+PRIVATE_KEY={INSERT YOUR METAMASK PRIVITE KEY HERE WITHOUT THE BRACKETS}
 
+NETWORK_NAME='Polygon Amoy Testnet'
+RPC_URL='https://rpc-amoy.polygon.technology/'
+CHAIN_ID=80002
+SYMBOL='MATIC'
+BLOCK_EXPLORER='https://amoy.polygonscan.com/'
+```
+- Access the private key by going to:
+- - metamask extension
+- - 3 dots top right
+- - account details
+- - show private key
+- cd Medi_vault/Frontend
+- npm i
+- npx synress run
+- - also add on '-no-video' to the end of the command to get the test runs without recording them
 
 
 
