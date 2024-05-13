@@ -61,7 +61,8 @@ const AppointmentTab = () => {
                 u_id: app.id.toString(),
                 patientName: app.patientName,
                 date: new Date(parseInt(app.date, 10) * 1000).toLocaleDateString(),
-                time: 'Time Placeholder' // Update as necessary
+                time: new Date(parseInt(app.date, 10) * 1000).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),// Update as necessary
+                reason: app.message
             })));
 
         } catch (error) {
@@ -78,6 +79,7 @@ const AppointmentTab = () => {
                         <th>Patient Name</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Reason</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -87,6 +89,7 @@ const AppointmentTab = () => {
                             <td>{appointment.patientName}</td>
                             <td>{appointment.date}</td>
                             <td>{appointment.time}</td>
+                            <td>{appointment.reason}</td>
                             <td>
                                 <Link to={`/patient/${appointment.id}/${appointment.u_id}`} className="btn btn-primary btn-sm">View Details</Link>
                             </td>

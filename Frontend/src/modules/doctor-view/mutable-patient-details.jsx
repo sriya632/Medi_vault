@@ -41,7 +41,6 @@ const MutablePatientDetails = () => {
             fetchComments(u_id);
         }
     }, [account, web3, u_id]);
-
     const connectWallet = async () => {
         try {
             const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
@@ -85,10 +84,11 @@ const MutablePatientDetails = () => {
         const contract = new web3.eth.Contract(D_P_CONTRACT_ABI, D_P_CONTRACT_ADDRESS);
         try {
             const comments = await contract.methods.viewComment(appointmentId).call();
+            const hasComments = comments && comments.trim().length > 0;
             setPatient(prev => ({
                 ...prev,
                 doctorsComments: comments,
-                commentsSubmitted: comments !== ''
+                commentsSubmitted: hasComments
             }));
         } catch (error) {
             console.error("Failed to fetch comments:", error);

@@ -94,6 +94,9 @@ const AppointmentPage = () => {
       return;
     }
     else {
+      const dateTimeString = `${formData.date}T${formData.time}:00`; // Add :00 for seconds
+      const appointmentDate = new Date(dateTimeString);
+      const timestamp = Math.floor(appointmentDate.getTime() / 1000);
     // Handle form submission logic here
     try {
       // Example of a contract function call
