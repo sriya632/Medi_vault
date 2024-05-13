@@ -1,4 +1,4 @@
-# Medi_vault
+# Medi_vault Team 22
 **520 project repository**
 
 **Introduction**
@@ -61,6 +61,7 @@ Note : Each account can only have one user.
 - once registration is done you can login using those credentials 
 - all the features are shown in the demo video
 - Similarly for doctor ( login with metamask is only available couldn't implement login with google)
+- demo link : https://youtu.be/BRyKb9QQC94
 
 
 **Running Test Cases :**
@@ -97,5 +98,13 @@ BLOCK_EXPLORER='https://amoy.polygonscan.com/'
 - npx synress run
   - also add on '-no-video' to the end of the command to get the test runs without recording them
 
+**Contributions :**
+
+- Sai Mahesh Sure - Worked on backend like writing smart contracts for login, register , doctors access , profile creation and wrote backend testcases for all smart contracts
+- Chaitanya Changala - worked on backend like writing smart contracts for booking apoointments , post apooitnment functionalties and Worked on Frontend-Backend integration for communication.
+- Sriya Choudary Yalevarthy - worked on UI UX design and development of login page of both patient and doctor , register page , about us page, apoointment booking page .
+- Timothy Quach - worked on UI UX design and development of doctors dashboard, doctors introduction page , writing testcases for front end components
+
+Choosing tech stack and architecture - Everyone contributed equally
 
 
