@@ -72,10 +72,10 @@ Backend:
 - for running smart contract testcases you need two files , one is smart contract file and another is smart contrat test file.
 - All smart contracts are available in Backend folder in the application directory and all smart contract test cases file are there in test_files_backend folder.
 - you need to import all smart contracts and smart contracts test files into remix. Then should start deploying and testing.
-- 
+
 
 Frontend:
-- create a .env file in the Medi_vault/Frontend directory
+- create a .env file in the Medi_vault/Frontend directory (the one provided may also work)
 - populate it with:
 ```
 CYPRESS_REMOTE_DEBUGGING_PORT=9222
@@ -95,8 +95,8 @@ BLOCK_EXPLORER='https://amoy.polygonscan.com/'
   - show private key
 - cd Medi_vault/Frontend
 - npm i
-- npx synress run
-  - also add on '-no-video' to the end of the command to get the test runs without recording them
+- npm run dev
+- npx synpress run (on a seperate window)
 
 **Contributions :**
 
