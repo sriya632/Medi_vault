@@ -102,7 +102,7 @@ BLOCK_EXPLORER='https://amoy.polygonscan.com/'
 
 - Sai Mahesh Sure - Worked on backend like writing smart contracts for login, register , doctors access , profile creation and wrote backend testcases for all smart contracts
 - Chaitanya Changala - worked on backend like writing smart contracts for booking apoointments , post apooitnment functionalties and Worked on Frontend-Backend integration for communication.
-- Sriya Choudary Yalevarthy - worked on UI UX design and development of login page of both patient and doctor , register page , about us page, apoointment booking page .
+- [Sriya Choudary Yalavarthy](https://github.com/sriya632) - worked on UI UX design and development of login page of both patient and doctor , register page , about us page, apoointment booking page .
 - Timothy Quach - worked on UI UX design and development of doctors dashboard, doctors introduction page , writing testcases for front end components
 
 Choosing tech stack and architecture - Everyone contributed equally
